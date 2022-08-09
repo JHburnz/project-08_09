@@ -14,7 +14,3 @@ public class ProjApplication {
 
 }
 
-@Data
-class Article {
-	private int id;
-}
