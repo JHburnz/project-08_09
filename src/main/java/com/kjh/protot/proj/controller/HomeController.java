@@ -9,8 +9,15 @@ public class HomeController {
 	@RequestMapping("/usr/home/test")
 	@ResponseBody
 	public String test() {
-		System.out.println("test");
+
 		return "서버 확인";
 	}
-
+	
+	@RequestMapping("/usr/home/main")
+	public String showMain() {
+		return "usr/home/main";
+	}
+	
+	
+	
 }
