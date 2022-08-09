@@ -1,4 +1,4 @@
-package com.kjh.protot.repository;
+package com.kjh.protot.proj.repository;
 
 import org.springframework.stereotype.Repository;
 
