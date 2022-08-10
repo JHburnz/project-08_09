@@ -8,17 +8,16 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Member {
-	private int id;
+	public int id;
 	private String regDate;
 	private String updateDate;
 	private String loginId;
 	private String loginPw;
-	private String name;
-	private String nickname;
+	public String name;
 	private String email;
 	private boolean delStatus;
 	private String delDate;
-	private String location;
 	private String cellphoneNo;
+	private String location;
 
 }

@@ -5,11 +5,9 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
-import org.springframework.stereotype.Repository;
 
 import com.kjh.protot.proj.vo.Member;
 
-@Repository
 @Mapper
 public interface MemberRepository {
 
@@ -20,14 +18,12 @@ public interface MemberRepository {
 			loginId = #{loginId},
 			loginPw = #{loginPw},
 			`name` = #{name},
-			nickname = #{nickname},
-			email = #{email}
+			email = #{email},
 			cellphoneNo = #{cellphoneNo},
 			location = #{location}
 						""")
 	void join(@Param("loginId") String loginId, @Param("loginPw") String loginPw, @Param("name") String name,
-			@Param("nickname") String nickname, @Param("email") String email, @Param("cellphoneNo") String cellphoneNo,
-			@Param("location") String location);
+			@Param("email") String email, @Param("cellphoneNo") String cellphoneNo, @Param("location") String location);
 
 	@Select("SELECT LAST_INSERT_ID()")
 	int getLastInsertId();
@@ -81,7 +77,5 @@ public interface MemberRepository {
 			WHERE id = #{id}
 			</script>
 			""")
-	void modify(int id, String loginPw, String name, String nickname, String email, String cellphoneNo,
-			String location);
-
+	void modify(int id, String loginPw, String name, String email, String cellphoneNo, String location);
 }

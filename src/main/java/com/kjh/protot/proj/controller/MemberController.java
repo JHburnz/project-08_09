@@ -12,17 +12,20 @@ import com.kjh.protot.proj.vo.Rq;
 
 @Controller
 public class MemberController {
-
-	MemberService memberService;
+	private MemberService memberService;
 	private Rq rq;
 
+	public MemberController(MemberService memberService) {
+		this.memberService = memberService;
+		this.rq = rq;
+	}
+
+	// /usr/member/doJoin?loginId=123&loginPw=123&name=123&nickname=123&email=123&cellphoneNo=123&location=123
 	@RequestMapping("/usr/member/doJoin")
 	@ResponseBody
+	public ResultData<Member> doJoin(String loginId, String loginPw, String name, String email, String cellphoneNo,
+			String location) {
 
-	// ?loginId=123&loginPw=123&name=123&nickname=123&email=123&cellphoneNo=123&location=123
-
-	public ResultData<Member> doJoin(String loginId, String loginPw, String name, String nickname, String email,
-			String cellphoneNo, String location) {
 		if (Ut.empty(loginId)) {
 			return ResultData.from("F-1", "loginId(을)를 입력해주세요.");
 		}
@@ -33,10 +36,6 @@ public class MemberController {
 
 		if (Ut.empty(name)) {
 			return ResultData.from("F-3", "name(을)를 입력해주세요.");
-		}
-
-		if (Ut.empty(nickname)) {
-			return ResultData.from("F-4", "nickname(을)를 입력해주세요.");
 		}
 
 		if (Ut.empty(email)) {
@@ -51,7 +50,7 @@ public class MemberController {
 			return ResultData.from("F-7", "location(을)를 입력해주세요.");
 		}
 
-		ResultData<Integer> joinRd = memberService.join(loginId, loginPw, name, nickname, email, cellphoneNo, location);
+		ResultData<Integer> joinRd = memberService.join(loginId, loginPw, name, email, cellphoneNo, location);
 
 		if (joinRd.isFail()) {
 			return (ResultData) joinRd;
@@ -62,7 +61,7 @@ public class MemberController {
 		return ResultData.newData(joinRd, "member", member);
 	}
 
-	@RequestMapping("/usr/member/doLogin")
+	@RequestMapping("/usr/member/doLogout")
 	@ResponseBody
 	public String doLogout() {
 		if (!rq.isLogined()) {
@@ -106,7 +105,7 @@ public class MemberController {
 
 		rq.login(member);
 
-		return rq.jsReplace(Ut.f("%s님 환영합니다.", member.getNickname()), "/");
+		return rq.jsReplace(Ut.f("%s님 환영합니다.", member.name), "/");
 	}
 
 	@RequestMapping("/usr/member/myPage")
@@ -130,12 +129,6 @@ public class MemberController {
 			return rq.jsHistoryBack("비밀번호가 일치하지 않습니다.");
 		}
 
-		if (replaceUri.equals("../member/modify")) {
-			String memberModifyAuthKey = memberService.genMemberModifyAuthKey(rq.getLoginedMemberId());
-
-			replaceUri += "?memberModifyAuthKey=" + memberModifyAuthKey;
-		}
-
 		return rq.jsReplace("", replaceUri);
 	}
 
@@ -145,30 +138,12 @@ public class MemberController {
 			return rq.historyBackJsOnView("memberModifyAuthKey(이)가 필요합니다.");
 		}
 
-		ResultData checkMemberModifyAuthKeyRd = memberService.checkMemberModifyAuthKey(rq.getLoginedMemberId(),
-				memberModifyAuthKey);
-
-		if (checkMemberModifyAuthKeyRd.isFail()) {
-			return rq.historyBackJsOnView(checkMemberModifyAuthKeyRd.getMsg());
-		}
-
 		return "usr/member/modify";
 	}
 
 	@RequestMapping("/usr/member/doModify")
 	@ResponseBody
-	public String doModify(String memberModifyAuthKey, String loginPw, String name, String nickname, String email,
-			String cellphoneNo) {
-		if (Ut.empty(memberModifyAuthKey)) {
-			return rq.jsHistoryBack("memberModifyAuthKey(이)가 필요합니다.");
-		}
-
-		ResultData checkMemberModifyAuthKeyRd = memberService.checkMemberModifyAuthKey(rq.getLoginedMemberId(),
-				memberModifyAuthKey);
-
-		if (checkMemberModifyAuthKeyRd.isFail()) {
-			return rq.jsHistoryBack(checkMemberModifyAuthKeyRd.getMsg());
-		}
+	public String doModify(String loginPw, String name, String email, String cellphoneNo, String location) {
 
 		if (Ut.empty(loginPw)) {
 			loginPw = null;
@@ -176,10 +151,6 @@ public class MemberController {
 
 		if (Ut.empty(name)) {
 			return rq.jsHistoryBack("이름(을) 입력해주세요.");
-		}
-
-		if (Ut.empty(nickname)) {
-			return rq.jsHistoryBack("닉네임(을) 입력해주세요.");
 		}
 
 		if (Ut.empty(email)) {
@@ -190,8 +161,12 @@ public class MemberController {
 			return rq.jsHistoryBack("휴대전화번호(을) 입력해주세요.");
 		}
 
-		ResultData modifyRd = memberService.modify(rq.getLoginedMemberId(), loginPw, name, nickname, email,
-				cellphoneNo);
+		if (Ut.empty(location)) {
+			return rq.jsHistoryBack("위치를(을) 입력해주세요.");
+		}
+
+		ResultData modifyRd = memberService.modify(rq.getLoginedMemberId(), loginPw, name, email, cellphoneNo,
+				location);
 
 		return rq.jsReplace(modifyRd.getMsg(), "/");
 	}
