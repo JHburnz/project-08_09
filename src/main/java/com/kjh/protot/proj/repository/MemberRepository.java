@@ -50,14 +50,17 @@ public interface MemberRepository {
 			""")
 	Member getMemberByNameAndEmail(@Param("name") String name, @Param("email") String email);
 
+	
+//	 <if test="loginPw != null">
+//	loginPw = #{loginPw},
+//</if>
+	
 	@Update("""
 			<script>
 			UPDATE `member`
 			<set>
 				updateDate = NOW(),
-				<if test="loginPw != null">
-					loginPw = #{loginPw},
-				</if>
+				
 				<if test="name != null">
 					name = #{name},
 				</if>

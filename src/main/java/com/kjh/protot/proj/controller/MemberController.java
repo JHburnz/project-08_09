@@ -90,7 +90,6 @@ public class MemberController {
 		}
 		Member member = memberService.getMemberByLoginId(loginId);
 
-
 		if (member == null) {
 			return "존재하지 않은 로그인아이디 입니다.";
 		}
@@ -125,7 +124,6 @@ public class MemberController {
 //
 //		return rq.jsReplace(Ut.f("%s님 환영합니다.", member.name), "/");
 
-}
 //	@RequestMapping("/usr/member/myPage")
 //	public String showMyPage() {
 //		return "usr/member/myPage";
@@ -159,10 +157,39 @@ public class MemberController {
 //		return "usr/member/modify";
 //	}
 //
-//	@RequestMapping("/usr/member/doModify")
-//	@ResponseBody
-//	public String doModify(String loginPw, String name, String email, String cellphoneNo, String location) {
-//
+	@RequestMapping("/usr/member/doModify")
+	@ResponseBody
+	public String doModify(String loginPw, String name, String email, String cellphoneNo, String location) {
+
+//		http://localhost:8081/usr/member/doModify?loginPw=123&name=234&email=234&cellphoneNo=234&location=324
+		
+		if (Ut.empty(loginPw)) {
+			loginPw = null;
+		}
+
+		if (Ut.empty(name)) {
+			return "이름(을) 입력해주세요.";
+		}
+
+		if (Ut.empty(email)) {
+			return "이메일(을) 입력해주세요.";
+		}
+
+		if (Ut.empty(cellphoneNo)) {
+			return "휴대전화번호(을) 입력해주세요.";
+		}
+
+		if (Ut.empty(location)) {
+			return "위치를(을) 입력해주세요.";
+		}
+
+		ResultData modifyRd = memberService.modify(rq.getLoginedMemberId(), loginPw, name, email, cellphoneNo,
+				location);
+
+		return modifyRd.getMsg();
+	}
+}
+
 //		if (Ut.empty(loginPw)) {
 //			loginPw = null;
 //		}
