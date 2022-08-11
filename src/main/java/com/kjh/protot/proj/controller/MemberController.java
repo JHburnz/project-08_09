@@ -73,101 +73,119 @@ public class MemberController {
 		return rq.jsReplace("로그아웃 되었습니다.", "/");
 	}
 
-	@RequestMapping("/usr/member/login")
-	public String showLogin() {
-		return "usr/member/login";
-	}
+//	@RequestMapping("/usr/member/login")
+//	public String showLogin() {
+//		return "usr/member/login";
+//	}
 
 	@RequestMapping("/usr/member/doLogin")
 	@ResponseBody
 	public String doLogin(String loginId, String loginPw) {
-		if (rq.isLogined()) {
-			return rq.jsHistoryBack("이미 로그인되었습니다.");
-		}
-
 		if (Ut.empty(loginId)) {
-			return rq.jsHistoryBack("loginId(을)를 입력해주세요.");
+			return "loginId(을)를 입력해주세요.";
 		}
 
 		if (Ut.empty(loginPw)) {
-			return rq.jsHistoryBack("loginPw(을)를 입력해주세요.");
+			return "loginPw(을)를 입력해주세요.";
 		}
-
 		Member member = memberService.getMemberByLoginId(loginId);
 
+
 		if (member == null) {
-			return rq.jsHistoryBack("존재하지 않은 로그인아이디 입니다.");
+			return "존재하지 않은 로그인아이디 입니다.";
 		}
 
 		if (member.getLoginPw().equals(loginPw) == false) {
-			return rq.jsHistoryBack("비밀번호가 일치하지 않습니다.");
+			return "비밀번호가 일치하지 않습니다.";
 		}
-
-		rq.login(member);
-
-		return rq.jsReplace(Ut.f("%s님 환영합니다.", member.name), "/");
+		return Ut.f("%s님 환영합니다.", member.name);
 	}
 
-	@RequestMapping("/usr/member/myPage")
-	public String showMyPage() {
-		return "usr/member/myPage";
-	}
+//		if (rq.isLogined()) {
+//			return rq.jsHistoryBack("이미 로그인되었습니다.");
+//		}
+//
+//		if (Ut.empty(loginId)) {
+//			return rq.jsHistoryBack("loginId(을)를 입력해주세요.");
+//		}
+//
+//		if (Ut.empty(loginPw)) {
+//			return rq.jsHistoryBack("loginPw(을)를 입력해주세요.");
+//		}
+//
+//		if (member == null) {
+//			return rq.jsHistoryBack("존재하지 않은 로그인아이디 입니다.");
+//		}
+//
+//		if (member.getLoginPw().equals(loginPw) == false) {
+//			return rq.jsHistoryBack("비밀번호가 일치하지 않습니다.");
+//		}
+//
+//		rq.login(member);
+//
+//		return rq.jsReplace(Ut.f("%s님 환영합니다.", member.name), "/");
 
-	@RequestMapping("/usr/member/checkPassword")
-	public String showCheckPassword() {
-		return "usr/member/checkPassword";
-	}
-
-	@RequestMapping("/usr/member/doCheckPassword")
-	@ResponseBody
-	public String doCheckPassword(String loginPw, String replaceUri) {
-		if (Ut.empty(loginPw)) {
-			return rq.jsHistoryBack("loginPw(을)를 입력해주세요.");
-		}
-
-		if (rq.getLoginedMember().getLoginPw().equals(loginPw) == false) {
-			return rq.jsHistoryBack("비밀번호가 일치하지 않습니다.");
-		}
-
-		return rq.jsReplace("", replaceUri);
-	}
-
-	@RequestMapping("/usr/member/modify")
-	public String showModify(String memberModifyAuthKey) {
-		if (Ut.empty(memberModifyAuthKey)) {
-			return rq.historyBackJsOnView("memberModifyAuthKey(이)가 필요합니다.");
-		}
-
-		return "usr/member/modify";
-	}
-
-	@RequestMapping("/usr/member/doModify")
-	@ResponseBody
-	public String doModify(String loginPw, String name, String email, String cellphoneNo, String location) {
-
-		if (Ut.empty(loginPw)) {
-			loginPw = null;
-		}
-
-		if (Ut.empty(name)) {
-			return rq.jsHistoryBack("이름(을) 입력해주세요.");
-		}
-
-		if (Ut.empty(email)) {
-			return rq.jsHistoryBack("이메일(을) 입력해주세요.");
-		}
-
-		if (Ut.empty(cellphoneNo)) {
-			return rq.jsHistoryBack("휴대전화번호(을) 입력해주세요.");
-		}
-
-		if (Ut.empty(location)) {
-			return rq.jsHistoryBack("위치를(을) 입력해주세요.");
-		}
-
-		ResultData modifyRd = memberService.modify(rq.getLoginedMemberId(), loginPw, name, email, cellphoneNo,
-				location);
-
-		return rq.jsReplace(modifyRd.getMsg(), "/");
-	}
 }
+//	@RequestMapping("/usr/member/myPage")
+//	public String showMyPage() {
+//		return "usr/member/myPage";
+//	}
+//
+//	@RequestMapping("/usr/member/checkPassword")
+//	public String showCheckPassword() {
+//		return "usr/member/checkPassword";
+//	}
+//
+//	@RequestMapping("/usr/member/doCheckPassword")
+//	@ResponseBody
+//	public String doCheckPassword(String loginPw, String replaceUri) {
+//		if (Ut.empty(loginPw)) {
+//			return rq.jsHistoryBack("loginPw(을)를 입력해주세요.");
+//		}
+//
+//		if (rq.getLoginedMember().getLoginPw().equals(loginPw) == false) {
+//			return rq.jsHistoryBack("비밀번호가 일치하지 않습니다.");
+//		}
+//
+//		return rq.jsReplace("", replaceUri);
+//	}
+//
+//	@RequestMapping("/usr/member/modify")
+//	public String showModify(String memberModifyAuthKey) {
+//		if (Ut.empty(memberModifyAuthKey)) {
+//			return rq.historyBackJsOnView("memberModifyAuthKey(이)가 필요합니다.");
+//		}
+//
+//		return "usr/member/modify";
+//	}
+//
+//	@RequestMapping("/usr/member/doModify")
+//	@ResponseBody
+//	public String doModify(String loginPw, String name, String email, String cellphoneNo, String location) {
+//
+//		if (Ut.empty(loginPw)) {
+//			loginPw = null;
+//		}
+//
+//		if (Ut.empty(name)) {
+//			return rq.jsHistoryBack("이름(을) 입력해주세요.");
+//		}
+//
+//		if (Ut.empty(email)) {
+//			return rq.jsHistoryBack("이메일(을) 입력해주세요.");
+//		}
+//
+//		if (Ut.empty(cellphoneNo)) {
+//			return rq.jsHistoryBack("휴대전화번호(을) 입력해주세요.");
+//		}
+//
+//		if (Ut.empty(location)) {
+//			return rq.jsHistoryBack("위치를(을) 입력해주세요.");
+//		}
+//
+//		ResultData modifyRd = memberService.modify(rq.getLoginedMemberId(), loginPw, name, email, cellphoneNo,
+//				location);
+//
+//		return rq.jsReplace(modifyRd.getMsg(), "/");
+//	}
+//}

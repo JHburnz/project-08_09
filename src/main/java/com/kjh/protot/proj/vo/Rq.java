@@ -107,4 +107,5 @@ public class Rq {
 	public String getEncodedCurrentUri() {
 		return Ut.getUriEncoded(getCurrentUri());
 	}
+
 }
