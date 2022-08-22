@@ -2,6 +2,7 @@ package com.kjh.protot.proj.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kjh.protot.proj.service.MemberService;
@@ -15,50 +16,55 @@ public class MemberController {
 	private MemberService memberService;
 	private Rq rq;
 
-	public MemberController(MemberService memberService) {
+	public MemberController(MemberService memberService, Rq rq) {
 		this.memberService = memberService;
 		this.rq = rq;
 	}
 
 	// /usr/member/doJoin?loginId=123&loginPw=123&name=123&nickname=123&email=123&cellphoneNo=123&location=123
+
 	@RequestMapping("/usr/member/doJoin")
 	@ResponseBody
-	public ResultData<Member> doJoin(String loginId, String loginPw, String name, String email, String cellphoneNo,
-			String location) {
-
+	public String doJoin(String loginId, String loginPw, String name, String cellphoneNo, String email, String location,
+			@RequestParam(defaultValue = "/") String afterLoginUri) {
 		if (Ut.empty(loginId)) {
-			return ResultData.from("F-1", "loginId(을)를 입력해주세요.");
+			return rq.jsHistoryBack("F-1", "loginId(을)를 입력해주세요.");
 		}
 
 		if (Ut.empty(loginPw)) {
-			return ResultData.from("F-2", "loginPw(을)를 입력해주세요.");
+			return rq.jsHistoryBack("F-2", "loginPw(을)를 입력해주세요.");
 		}
 
 		if (Ut.empty(name)) {
-			return ResultData.from("F-3", "name(을)를 입력해주세요.");
+			return rq.jsHistoryBack("F-3", "name(을)를 입력해주세요.");
 		}
 
 		if (Ut.empty(email)) {
-			return ResultData.from("F-5", "email(을)를 입력해주세요.");
+			return rq.jsHistoryBack("F-5", "email(을)를 입력해주세요.");
 		}
 
 		if (Ut.empty(cellphoneNo)) {
-			return ResultData.from("F-6", "cellphoneNo(을)를 입력해주세요.");
+			return rq.jsHistoryBack("F-4", "cellphoneNo(을)를 입력해주세요.");
 		}
 
 		if (Ut.empty(location)) {
-			return ResultData.from("F-7", "location(을)를 입력해주세요.");
+			return rq.jsHistoryBack("F-6", "location(을)를 입력해주세요.");
 		}
 
-		ResultData<Integer> joinRd = memberService.join(loginId, loginPw, name, email, cellphoneNo, location);
+		ResultData<Integer> joinRd = memberService.join(loginId, loginPw, name, cellphoneNo, email, location);
 
 		if (joinRd.isFail()) {
-			return (ResultData) joinRd;
+			return rq.jsHistoryBack(joinRd.getResultCode(), joinRd.getMsg());
 		}
 
-		Member member = memberService.getMemberById(joinRd.getData1());
+		String afterJoinUri = "../member/login?afterLoginUri=" + Ut.getUriEncoded(afterLoginUri);
 
-		return ResultData.newData(joinRd, "member", member);
+		return rq.jsReplace("회원가입이 완료되었습니다. 로그인 후 이용해주세요.", afterJoinUri);
+	}
+
+	@RequestMapping("/usr/member/join")
+	public String showJoin() {
+		return "usr/member/join";
 	}
 
 	@RequestMapping("/usr/member/doLogout")
@@ -73,36 +79,47 @@ public class MemberController {
 		return rq.jsReplace("로그아웃 되었습니다.", "/");
 	}
 
-//	@RequestMapping("/usr/member/login")
-//	public String showLogin() {
-//		return "usr/member/login";
-//	}
+	@RequestMapping("/usr/member/login")
+	public String showLogin() {
+		return "usr/member/login";
+	}
 
 	@RequestMapping("/usr/member/doLogin")
 	@ResponseBody
-	public String doLogin(String loginId, String loginPw) {
+	public String doLogin(String loginId, String loginPw, @RequestParam(defaultValue = "/") String afterLoginUri) {
+		if (rq.isLogined()) {
+			return rq.jsHistoryBack("이미 로그인되었습니다.");
+		}
+
 		if (Ut.empty(loginId)) {
-			return "loginId(을)를 입력해주세요.";
+			return rq.jsHistoryBack("loginId(을)를 입력해주세요.");
 		}
 
 		if (Ut.empty(loginPw)) {
-			return "loginPw(을)를 입력해주세요.";
+			return rq.jsHistoryBack("loginPw(을)를 입력해주세요.");
 		}
+
 		Member member = memberService.getMemberByLoginId(loginId);
 
 		if (member == null) {
-			return "존재하지 않은 로그인아이디 입니다.";
+			return rq.jsHistoryBack("존재하지 않은 로그인아이디 입니다.");
 		}
 
 		if (member.getLoginPw().equals(loginPw) == false) {
-			return "비밀번호가 일치하지 않습니다.";
+			return rq.jsHistoryBack("비밀번호가 일치하지 않습니다.");
 		}
-		return Ut.f("%s님 환영합니다.", member.name);
+
+		rq.login(member);
+
+		return rq.jsReplace(Ut.f("%s님 환영합니다.", member.name), afterLoginUri);
 	}
 
-//		if (rq.isLogined()) {
-//			return rq.jsHistoryBack("이미 로그인되었습니다.");
-//		}
+	@RequestMapping("/usr/member/page")
+	public String showMyPage() {
+		return "usr/member/page";
+	}
+
+//		
 //
 //		if (Ut.empty(loginId)) {
 //			return rq.jsHistoryBack("loginId(을)를 입력해주세요.");
@@ -162,7 +179,7 @@ public class MemberController {
 	public String doModify(String loginPw, String name, String email, String cellphoneNo, String location) {
 
 //		http://localhost:8081/usr/member/doModify?loginPw=123&name=234&email=234&cellphoneNo=234&location=324
-		
+
 		if (Ut.empty(loginPw)) {
 			loginPw = null;
 		}

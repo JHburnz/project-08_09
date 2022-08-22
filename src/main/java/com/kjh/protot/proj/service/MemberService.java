@@ -55,6 +55,7 @@ public class MemberService {
 		memberRepository.modify(loginedMemberId, loginPw, name, email, cellphoneNo, location);
 
 		return ResultData.from("S-1", "회원정보가 수정되었습니다.");
-	}
+
+	
 
 }

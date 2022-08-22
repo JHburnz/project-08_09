@@ -1,9 +1,8 @@
-# DB 생성
 DROP DATABASE IF EXISTS proj_data;
 CREATE DATABASE proj_data;
 USE proj_data;
 
-# 멤버 테이블 생성
+
 CREATE TABLE `member` (
     id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
     regDate DATETIME NOT NULL,
@@ -18,3 +17,15 @@ CREATE TABLE `member` (
     delStatus TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '탈퇴여부(0=탈퇴전, 1=탈퇴)',
     delDate DATETIME COMMENT '탈퇴날짜'
 );
+
+CREATE TABLE `aram` (
+    id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    workDate DATETIME NOT NULL,
+    repairDate DATETIME NOT NULL,
+    aramType SMALLINT(2) UNSIGNED DEFAULT 3 COMMENT '알람 종류(1=감지기, 2=스프링쿨러)',
+    `area` CHAR(100) NOT NULL   
+);
+
+DESC `aram`;
+
+
