@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page import="com.kjh.protot.proj.utill.Ut"%>
 
-<c:set var="pageTitle" value="마이페이지" />
+<c:set var="pageTitle" value="마이" />
 <%@ include file="../common/head.jspf"%>
 
 <section class="mt-5">
@@ -40,6 +40,8 @@
             <td>
               <a href="../member/checkPassword?replaceUri=${Ut.getUriEncoded('../member/modify')}"
                 class="btn btn-primary">회원정보수정</a>
+              <a href="../member/checkPassword?replaceUri=${Ut.getUriEncoded('../member/modify')}"
+                class="btn btn-primary">회원탈퇴</a>
               <button type="button" class="btn btn-outline btn-success" onclick="history.back();">뒤로가기</button>
             </td>
           </tr>

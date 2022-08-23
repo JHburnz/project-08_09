@@ -26,6 +26,28 @@ CREATE TABLE `aram` (
     `area` CHAR(100) NOT NULL   
 );
 
-DESC `aram`;
+INSERT INTO `member`
+SET regDate = NOW(),
+updateDate = NOW(),
+loginId = 'admin',
+loginPw = 'admin',
+authLevel = 7,
+`name` = "관리자",
+email = "amdin@gmail.com",
+cellphoneNo = "01011112222",
+location = "101호";
+
+INSERT INTO `member`
+SET regDate = NOW(),
+updateDate = NOW(),
+loginId = 'user1',
+loginPw = 'user1',
+authLevel = 7,
+`name` = "유저1",
+email = "user1@gmail.com",
+cellphoneNo = "01011112222",
+location = "102호";
+
+
 
 

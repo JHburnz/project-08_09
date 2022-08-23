@@ -2,6 +2,7 @@ package com.kjh.protot.proj.service;
 
 import org.springframework.stereotype.Service;
 
+import com.kjh.protot.proj.service.AttrService;
 import com.kjh.protot.proj.repository.MemberRepository;
 import com.kjh.protot.proj.utill.Ut;
 import com.kjh.protot.proj.vo.Member;
@@ -10,10 +11,11 @@ import com.kjh.protot.proj.vo.ResultData;
 @Service
 public class MemberService {
 	MemberRepository memberRepository;
+	private AttrService attrService;
 
 	public MemberService(MemberRepository memberRepository) {
 		this.memberRepository = memberRepository;
-
+		this.attrService = attrService;
 	}
 
 	public ResultData<Integer> join(String loginId, String loginPw, String name, String email, String cellphoneNo,
@@ -56,6 +58,24 @@ public class MemberService {
 
 		return ResultData.from("S-1", "회원정보가 수정되었습니다.");
 
-	
+	}
+
+	public String genMemberModifyAuthKey(int actorId) {
+		String memberModifyAuthKey = Ut.getTempPassword(10);
+
+		attrService.setValue("member", actorId, "extra", "memberModifyAuthKey", memberModifyAuthKey,
+				Ut.getDateStrLater(60 * 5));
+		return memberModifyAuthKey;
+	}
+
+	public ResultData checkMemberModifyAuthKey(int actorId, String memberModifyAuthKey) {
+		String saved = attrService.getValue("member", actorId, "extra", "memberModifyAuthKey");
+
+		if (!saved.equals(memberModifyAuthKey)) {
+			return ResultData.from("F-1", "일치하지 않거나 만료되었습니다.");
+		}
+
+		return ResultData.from("S-1", "정상적인 코드입니다.");
+	}
 
 }

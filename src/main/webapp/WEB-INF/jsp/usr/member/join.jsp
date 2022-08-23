@@ -43,12 +43,6 @@
 			form.name.focus();
 			return;
 		}
-		form.nickname.value = form.nickname.value.trim();
-		if (form.nickname.value.length == 0) {
-			alert('닉네임을 입력해주세요.');
-			form.nickname.focus();
-			return;
-		}
 		form.email.value = form.email.value.trim();
 		if (form.email.value.length == 0) {
 			alert('이메일을 입력해주세요.');
@@ -59,6 +53,13 @@
 		if (form.cellphoneNo.value.length == 0) {
 			alert('휴대전화번호를 입력해주세요.');
 			form.cellphoneNo.focus();
+			return;
+		}
+
+		form.location.value = form.location.value.trim();
+		if (form.location.value.length == 0) {
+			alert('위치을 입력해주세요.');
+			form.location.focus();
 			return;
 		}
 		submitJoinFormDone = true;
@@ -101,31 +102,26 @@
                 <input class="input input-bordered" name="name" placeholder="이름" type="text" />
               </td>
             </tr>
-
             <tr>
               <th>이메일</th>
               <td>
                 <input class="input input-bordered" name="email" placeholder="이메일" type="text" />
               </td>
             </tr>
-
             <tr>
               <th>휴대전화번호</th>
               <td>
                 <input class="input input-bordered" name="cellphoneNo" placeholder="휴대전화번호" type="text" />
               </td>
             </tr>
-
             <tr>
               <th>위치</th>
               <td>
                 <input class="input input-bordered" name="location" placeholder="위치" type="text" />
               </td>
             </tr>
-
-
             <tr>
-              <th></th>
+              <th>회원가입</th>
               <td>
                 <button type="submit" class="btn btn-primary">회원가입</button>
                 <button type="button" class="btn btn-outline btn-success" onclick="history.back();">뒤로가기</button>

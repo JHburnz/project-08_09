@@ -2,9 +2,9 @@ package com.kjh.protot.proj.vo;
 
 public class Aram {
 
-	String workDate;
-	String repairDate;
-	boolean status;
-	String area;
-	String aramType;
+	public String workDate;
+	public String repairDate;
+	public boolean status;
+	public String area;
+	public String aramType;
 }
