@@ -67,17 +67,6 @@ public class MemberController {
 		return "usr/member/join";
 	}
 
-	@RequestMapping("/usr/member/doLogout")
-	@ResponseBody
-	public String doLogout() {
-		if (!rq.isLogined()) {
-			return rq.jsHistoryBack("이미 로그아웃 상태입니다.");
-		}
-
-		rq.logout();
-
-		return rq.jsReplace("로그아웃 되었습니다.", "/");
-	}
 
 	@RequestMapping("/usr/member/login")
 	public String showLogin() {
@@ -112,6 +101,18 @@ public class MemberController {
 		rq.login(member);
 
 		return rq.jsReplace(Ut.f("%s님 환영합니다.", member.getName()), afterLoginUri);
+	}
+
+	@RequestMapping("/usr/member/doLogout")
+	@ResponseBody
+	public String doLogout() {
+		if (!rq.isLogined()) {
+			return rq.jsHistoryBack("이미 로그아웃 상태입니다.");
+		}
+
+		rq.logout();
+
+		return rq.jsReplace("로그아웃 되었습니다.", "/");
 	}
 
 	@RequestMapping("/usr/member/page")
@@ -163,7 +164,7 @@ public class MemberController {
 	@RequestMapping("/usr/member/doModify")
 	@ResponseBody
 	public String doModify(String memberModifyAuthKey, String loginPw, String name, String email, String cellphoneNo,
-			String location) {
+			String location, String area) {
 		if (Ut.empty(memberModifyAuthKey)) {
 			return rq.jsHistoryBack("memberModifyAuthKey(이)가 필요합니다.");
 		}
@@ -192,11 +193,15 @@ public class MemberController {
 		}
 
 		if (Ut.empty(location)) {
-			return rq.jsHistoryBack("휴대전화번호(을) 입력해주세요.");
+			return rq.jsHistoryBack("위치(을) 입력해주세요.");
 		}
 
-		ResultData modifyRd = memberService.modify(rq.getLoginedMemberId(), loginPw, name, email, cellphoneNo,
-				location);
+		if (Ut.empty(area)) {
+			return rq.jsHistoryBack("구역을(을) 입력해주세요.");
+		}
+
+		ResultData modifyRd = memberService.modify(rq.getLoginedMemberId(), loginPw, name, email, cellphoneNo, location
+			);
 
 		return rq.jsReplace(modifyRd.getMsg(), "/");
 	}

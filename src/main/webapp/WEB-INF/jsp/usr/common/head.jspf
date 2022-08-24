@@ -2,7 +2,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="ko" class="light" data-theme="light">
-
 <html>
 <head>
 <meta charset="UTF-8">
@@ -27,50 +26,35 @@
 </head>
 <body>
   <header>
-    <div class="flex h-20 container mx-auto">
-      <a href="/" class="flex items-center px-3">
-        <span>로고</span>
-      </a>
 
-      <div class="flex-grow"></div>
 
-      <ul class="flex">
+    <ul class="flex">
+      <li>
+        <a href="/" class="h-full flex items-center px-3 hover:underline">
+          <span>홈</span>
+        </a>
+      </li>
+
+
+
+      <c:if test="${rq.Logined}">
         <li>
-          <a href="/" class="h-full flex items-center px-3 hover:underline">
-            <span>홈</span>
+          <a href="/usr/aram/list" class="h-full flex items-center px-3 hover:underline">
+            <span>구역</span>
           </a>
         </li>
-
         <li>
-          <a href="/usr/member/join" class="h-full flex items-center px-3 hover:underline">
-            <span>회원가입</span>
+          <a href="/usr/member/Page" class="h-full flex items-center px-3 hover:underline">
+            <span>${rq.loginedMember.name}'s Profile</span>
           </a>
         </li>
-
-        <c:if test="${!rq.isLogined()}">
-          <li>
-            <a href="/usr/member/login" class="h-full flex items-center px-3 hover:underline">
-              <span>로그인</span>
-            </a>
-          </li>
-        </c:if>
-
-
-        <c:if test="${rq.logined}">
-          <li>
-            <a href="/usr/member/Page" class="h-full flex items-center px-3 hover:underline">
-              <span>${rq.loginedMember.name}'s Profile</span>
-            </a>
-          </li>
-          <li>
-            <a href="${rq.logoutUri}" class="h-full flex items-center px-3 hover:underline">
-              <span>로그아웃</span>
-            </a>
-          </li>
-        </c:if>
-
-
-      </ul>
+        <li>
+          <a href="${rq.logoutUri}" class="h-full flex items-center px-3 hover:underline">
+            <span>로그아웃</span>
+          </a>
+        </li>
+      </c:if>
+    </ul>
     </div>
   </header>
 

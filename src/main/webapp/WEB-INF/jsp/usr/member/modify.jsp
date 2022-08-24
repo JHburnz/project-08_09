@@ -90,13 +90,6 @@
               </td>
             </tr>
             <tr>
-              <th>닉네임</th>
-              <td>
-                <input class="input input-bordered" name="nickname" placeholder="닉네임을 입력해주세요." type="text"
-                  value="${rq.loginedMember.nickname}" />
-              </td>
-            </tr>
-            <tr>
               <th>이메일</th>
               <td>
                 <input class="input input-bordered" name="email" placeholder="이메일을 입력해주세요." type="text"
@@ -110,6 +103,24 @@
                   value="${rq.loginedMember.cellphoneNo}" />
               </td>
             </tr>
+            <tr>
+              <th>위치</th>
+              <td>
+                <input class="input input-bordered" name="location" placeholder="위치를 입력해주세요." type="text"
+                  value="${rq.loginedMember.nickname}" />
+              </td>
+            </tr>
+            <tr>
+              <th>경계구역</th>
+              <td>
+                <input class="input input-bordered" name="area" placeholder="경계구역를 입력해주세요." type="text"
+                  value="${rq.loginedMember.nickname}" />
+              </td>
+            </tr>
+
+
+
+
             <tr>
               <th>회원정보수정</th>
               <td>

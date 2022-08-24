@@ -34,6 +34,10 @@
             <th>위치</th>
             <td>${rq.loginedMember.location}</td>
           </tr>
+          <tr>
+            <th>위치</th>
+            <td>${rq.loginedMember.area}</td>
+          </tr>
 
           <tr>
             <th>비고</th>

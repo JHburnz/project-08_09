@@ -6,5 +6,5 @@ public class Aram {
 	public String repairDate;
 	public boolean status;
 	public String area;
-	public String aramType;
+
 }
