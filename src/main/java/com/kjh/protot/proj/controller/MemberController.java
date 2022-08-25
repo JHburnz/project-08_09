@@ -76,9 +76,10 @@ public class MemberController {
 	@RequestMapping("/usr/member/doLogin")
 	@ResponseBody
 	public String doLogin(String loginId, String loginPw, @RequestParam(defaultValue = "/") String afterLoginUri) {
-		if (rq.isLogined()) {
-			return rq.jsHistoryBack("이미 로그인되었습니다.");
-		}
+		System.out.println(rq.getLoginedMember());
+//		if (rq.isLogined()) {
+//			return rq.jsHistoryBack("이미 로그인되었습니다.");
+//		}
 
 		if (Ut.empty(loginId)) {
 			return rq.jsHistoryBack("loginId(을)를 입력해주세요.");
@@ -161,48 +162,48 @@ public class MemberController {
 		return "usr/member/modify";
 	}
 
-	@RequestMapping("/usr/member/doModify")
-	@ResponseBody
-	public String doModify(String memberModifyAuthKey, String loginPw, String name, String email, String cellphoneNo,
-			String location, String area) {
-		if (Ut.empty(memberModifyAuthKey)) {
-			return rq.jsHistoryBack("memberModifyAuthKey(이)가 필요합니다.");
-		}
-
-		ResultData checkMemberModifyAuthKeyRd = memberService.checkMemberModifyAuthKey(rq.getLoginedMemberId(),
-				memberModifyAuthKey);
-
-		if (checkMemberModifyAuthKeyRd.isFail()) {
-			return rq.jsHistoryBack(checkMemberModifyAuthKeyRd.getMsg());
-		}
-
-		if (Ut.empty(loginPw)) {
-			loginPw = null;
-		}
-
-		if (Ut.empty(name)) {
-			return rq.jsHistoryBack("이름(을) 입력해주세요.");
-		}
-
-		if (Ut.empty(email)) {
-			return rq.jsHistoryBack("이메일(을) 입력해주세요.");
-		}
-
-		if (Ut.empty(cellphoneNo)) {
-			return rq.jsHistoryBack("휴대전화번호(을) 입력해주세요.");
-		}
-
-		if (Ut.empty(location)) {
-			return rq.jsHistoryBack("위치(을) 입력해주세요.");
-		}
-
-		if (Ut.empty(area)) {
-			return rq.jsHistoryBack("구역을(을) 입력해주세요.");
-		}
-
-		ResultData modifyRd = memberService.modify(rq.getLoginedMemberId(), loginPw, name, email, cellphoneNo, location
-			);
-
-		return rq.jsReplace(modifyRd.getMsg(), "/");
-	}
+//	@RequestMapping("/usr/member/doModify")
+//	@ResponseBody
+//	public String doModify(String memberModifyAuthKey, String loginPw, String name, String email, String cellphoneNo,
+//			String location, String area) {
+//		if (Ut.empty(memberModifyAuthKey)) {
+//			return rq.jsHistoryBack("memberModifyAuthKey(이)가 필요합니다.");
+//		}
+//
+//		ResultData checkMemberModifyAuthKeyRd = memberService.checkMemberModifyAuthKey(rq.getLoginedMemberId(),
+//				memberModifyAuthKey);
+//
+//		if (checkMemberModifyAuthKeyRd.isFail()) {
+//			return rq.jsHistoryBack(checkMemberModifyAuthKeyRd.getMsg());
+//		}
+//
+//		if (Ut.empty(loginPw)) {
+//			loginPw = null;
+//		}
+//
+//		if (Ut.empty(name)) {
+//			return rq.jsHistoryBack("이름(을) 입력해주세요.");
+//		}
+//
+//		if (Ut.empty(email)) {
+//			return rq.jsHistoryBack("이메일(을) 입력해주세요.");
+//		}
+//
+//		if (Ut.empty(cellphoneNo)) {
+//			return rq.jsHistoryBack("휴대전화번호(을) 입력해주세요.");
+//		}
+//
+//		if (Ut.empty(location)) {
+//			return rq.jsHistoryBack("위치(을) 입력해주세요.");
+//		}
+//
+//		if (Ut.empty(area)) {
+//			return rq.jsHistoryBack("구역을(을) 입력해주세요.");
+//		}
+//
+//		ResultData modifyRd = memberService.modify(rq.getLoginedMemberId(), loginPw, name, email, cellphoneNo, location
+//			);
+//
+//		return rq.jsReplace(modifyRd.getMsg(), "/");
+//	}
 }
