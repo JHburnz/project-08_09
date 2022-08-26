@@ -12,7 +12,7 @@
         </colgroup>
         <tbody>
 
-          <c:if test="${!rq.isLogined}">
+          <c:if test="${!rq.isLogined()}">
             <tr>
               <th>로그인아이디</th>
               <td>
@@ -39,10 +39,8 @@
             </tr>
           </c:if>
 
-          <c:if test="${rq.logined}">
+          <c:if test="${rq.isLogined()}">
             <h1>로그인아이디</h1>
-
-
           </c:if>
 
 

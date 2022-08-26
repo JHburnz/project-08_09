@@ -49,7 +49,7 @@
         </a>
       </li>
 
-      <c:if test="${rq.Logined}">
+      <c:if test="${rq.logined}">
         <li>
           <a href="/usr/member/Page" class="h-full flex items-center px-3 hover:underline">
             <span>${rq.loginedMember.name}'s Profile</span>
