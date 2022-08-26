@@ -36,22 +36,23 @@
       </li>
 
 
-      <li>
-        <a href="/usr/aram/add" class="h-full flex items-center px-3 hover:underline">
-          <span>구역추가</span>
-        </a>
-      </li>
-
-
-      <li>
-        <a href="/usr/aram/list" class="h-full flex items-center px-3 hover:underline">
-          <span>경계구역</span>
-        </a>
-      </li>
-
       <c:if test="${rq.logined}">
+
         <li>
-          <a href="/usr/member/Page" class="h-full flex items-center px-3 hover:underline">
+          <a href="/usr/aram/add" class="h-full flex items-center px-3 hover:underline">
+            <span>구역추가</span>
+          </a>
+        </li>
+
+
+        <li>
+          <a href="/usr/aram/list" class="h-full flex items-center px-3 hover:underline">
+            <span>경계구역</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="/usr/member/page" class="h-full flex items-center px-3 hover:underline">
             <span>${rq.loginedMember.name}'s Profile</span>
           </a>
         </li>

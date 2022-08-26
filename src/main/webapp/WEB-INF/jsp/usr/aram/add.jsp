@@ -38,6 +38,13 @@
                 <input class="input input-bordered" name="area" placeholder="감지기가 추가된구역" type="text" />
               </td>
             </tr>
+            <tr>
+              <th>정보</th>
+              <td>
+                <input class="input input-bordered" name="intel" placeholder="구역의 추가정보" type="text" />
+              </td>
+            </tr>
+            
 
             <tr>
               <th></th>

@@ -24,6 +24,8 @@ public class Rq {
 	@Getter
 	private int loginedMemberId;
 	@Getter
+	private String loginedMemberLoca;
+	@Getter
 	private Member loginedMember;
 
 	private HttpServletRequest req;
@@ -46,8 +48,9 @@ public class Rq {
 			isLogined = true;
 			loginedMemberId = (int) session.getAttribute("loginedMemberId");
 			loginedMember = memberService.getMemberById(loginedMemberId);
+			
 		}
-
+		this.loginedMemberLoca = loginedMemberLoca;
 		this.isLogined = isLogined;
 		this.loginedMemberId = loginedMemberId;
 		this.loginedMember = loginedMember;
@@ -171,6 +174,11 @@ public class Rq {
 	// 편의를 위해 BeforeActionInterceptor 에서 꼭 호출을 해야한다.
 	public void initOnBeforeActionInterceptor() {
 
+	}
+
+	public String loginedMemberLoca() {
+
+		return null;
 	}
 
 }

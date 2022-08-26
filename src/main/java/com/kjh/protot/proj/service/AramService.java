@@ -1,7 +1,5 @@
 package com.kjh.protot.proj.service;
 
-import java.util.List;
-
 import org.springframework.stereotype.Service;
 
 import com.kjh.protot.proj.repository.AramRepository;
@@ -17,9 +15,24 @@ public class AramService {
 		this.aramRepository = aramRepository;
 	}
 
-	public ResultData<String> addAram(String area) {
-		aramRepository.addAram(area);
-		return ResultData.from("S-1", Ut.f("%d구역이 추가되엇습니다.", area), "area", area);
+	public ResultData<String> addAram(String area, String intel, String oL) {
+
+		System.out.println(area);
+		aramRepository.addAram(area, oL, intel);
+		return ResultData.from("S-1", Ut.f("%s구역이 추가되엇습니다.", area), "id", area);
 	}
+
+	public Aram writeAram(String area, String intel) {
+		return aramRepository.writeAram(area, intel);
+
+	}
+
+//	public List<Aram> getForPrintArea(String searchKeywordTypeCode) {
+//		List<Aram> areas = aramRepository.getForPrintArams(limitStart, limitTake);
+//		for (Aram area : areas) {
+//			updateForPrintData(actorId, area);
+//		}
+//
+//		return areas;
 
 }

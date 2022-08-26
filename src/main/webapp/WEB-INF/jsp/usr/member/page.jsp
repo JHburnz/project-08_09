@@ -21,7 +21,6 @@
             <th>이름</th>
             <td>${rq.loginedMember.name}</td>
           </tr>
-
           <tr>
             <th>이메일</th>
             <td>${rq.loginedMember.email}</td>
@@ -34,10 +33,7 @@
             <th>위치</th>
             <td>${rq.loginedMember.location}</td>
           </tr>
-          <tr>
-            <th>위치</th>
-            <td>${rq.loginedMember.area}</td>
-          </tr>
+
 
           <tr>
             <th>비고</th>

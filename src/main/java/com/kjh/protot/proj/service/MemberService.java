@@ -52,13 +52,13 @@ public class MemberService {
 		return memberRepository.getMemberById(id);
 	}
 
-//	public ResultData modify(int loginedMemberId, String loginPw, String name, String email, String cellphoneNo,
-//			String location) {
-//		memberRepository.modify(loginedMemberId, loginPw, name, email, cellphoneNo, location );
-//
-//		return ResultData.from("S-1", "회원정보가 수정되었습니다.");
-//
-//	}
+	public ResultData modify(int loginedMemberId, String loginPw, String name, String email, String cellphoneNo,
+			String location) {
+		memberRepository.modify(loginedMemberId, loginPw, name, email, cellphoneNo, location);
+
+		return ResultData.from("S-1", "회원정보가 수정되었습니다.");
+
+	}
 
 	public String genMemberModifyAuthKey(int actorId) {
 		String memberModifyAuthKey = Ut.getTempPassword(10);

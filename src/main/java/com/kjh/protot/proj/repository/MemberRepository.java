@@ -54,31 +54,29 @@ public interface MemberRepository {
 //	loginPw = #{loginPw},
 //</if>
 
-//	@Update("""
-//			<script>
-//			UPDATE `member`
-//			<set>
-//				updateDate = NOW(),
-//
-//				<if test="name != null">
-//					name = #{name},
-//				</if>
-//
-//				<if test="email != null">
-//					email = #{email},
-//				</if>
-//				
-//				<if test="cellphoneNo != null">
-//					cellphoneNo = #{cellphoneNo},
-//				</if>
-//				
-//				<if test="location != null">
-//					location = #{location},
-//
-//
-//			</set>
-//			WHERE id = #{id}
-//			</script>
-//			""")
-//	void modify(int id, String loginPw, String name, String email, String cellphoneNo, String location);
+	@Update("""
+			<script>
+			UPDATE `member`
+			<set>
+				updateDate = NOW(),
+				<if test="loginPw != null">
+					loginPw = #{loginPw},
+				</if>
+				<if test="name != null">
+					name = #{name},
+				</if>
+				<if test="email != null">
+					email = #{email},
+				</if>
+				<if test="cellphoneNo != null">
+					cellphoneNo = #{cellphoneNo},
+				</if>
+				<if test="location != null">
+				location = #{location},
+				</if>
+			</set>
+			WHERE id = #{id}
+			</script>
+			""")
+	void modify(int id, String loginPw, String name, String email, String cellphoneNo, String location);
 }
