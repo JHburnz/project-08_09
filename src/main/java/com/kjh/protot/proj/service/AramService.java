@@ -15,16 +15,10 @@ public class AramService {
 		this.aramRepository = aramRepository;
 	}
 
-	public ResultData<String> addAram(String area, String intel, String oL) {
+	public ResultData<String> writeAram(String oL, String area, String intel) {
+		aramRepository.writeAram(oL, area, intel);
 
-		System.out.println(area);
-		aramRepository.addAram(area, oL, intel);
-		return ResultData.from("S-1", Ut.f("%s구역이 추가되엇습니다.", area), "id", area);
-	}
-
-	public Aram writeAram(String area, String intel) {
-		return aramRepository.writeAram(area, intel);
-
+		return ResultData.from("S-1", Ut.f("%s번 게시물이 생성되었습니다.", area), "area", area);
 	}
 
 //	public List<Aram> getForPrintArea(String searchKeywordTypeCode) {

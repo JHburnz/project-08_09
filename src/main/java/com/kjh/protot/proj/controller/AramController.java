@@ -21,32 +21,12 @@ public class AramController {
 		this.rq = rq;
 	}
 
-	@RequestMapping("/usr/aram/add")
-	public String add() {
+	@RequestMapping("/usr/aram/write")
+	public String write() {
 
-		return "usr/aram/add";
+		return "usr/aram/write";
 	}
 
-	@RequestMapping("/usr/aram/doAdd")
-	@ResponseBody
-	public String doAdd(String area, String intel) {
-		if (Ut.empty(area)) {
-			return rq.jsHistoryBack("area(을)를 입력해주세요.");
-		}
-
-		Member m = rq.getLoginedMember();
-
-		if (intel == "") {
-			intel = "공란";
-		}
-
-		ResultData<String> addAramRd = aramService.addAram(m.getLocation(), area, intel);
-
-		System.out.println("작동");
-
-		return rq.jsReplace(Ut.f("%s호 구역이 추가되엇스빈다", addAramRd.getData1()), "/usr/aram/add");
-
-	}
 //
 //	@RequestMapping("/usr/article/list")
 //	public String showList(Model model, @RequestParam(defaultValue = "area") String area) {
@@ -58,18 +38,35 @@ public class AramController {
 //		return "usr/article/list";
 //	}
 
+
+	@RequestMapping("/usr/aram/doWrite")
+	@ResponseBody
+	public String doWrite(String area, String intel) {
+
+		String oL;
+
+		Member m;
+		m = rq.getLoginedMember();
+
+		oL = m.getLocation();
+
+		if (Ut.empty(area)) {
+			return rq.jsHistoryBack("area(을)를 입력해주세요.");
+		}
+
+		if (Ut.empty(intel)) {
+			intel = "공란";
+		}
+
+		ResultData<String> aram = aramService.writeAram(oL, area, intel);
+		return rq.jsReplace((Ut.f("%s에 구역이 추가되었습니다", oL)), "/usr/aram/write");
+
+	}
+
 	@RequestMapping("/usr/aram/ring")
 	@ResponseBody
 	public String run() {
 
 		return "%s구역 화재.";
 	}
-
-	@RequestMapping("/usr/aram/write")
-	@ResponseBody
-	public Aram write(String area, String intel) {
-		Aram aram = aramService.writeAram(area, intel);
-		return aram;
-	}
-
 }

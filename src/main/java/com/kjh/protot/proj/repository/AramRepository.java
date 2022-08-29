@@ -14,12 +14,10 @@ public interface AramRepository {
 			SET workDate = NOW(),
 			repairDate = NOW(),
 			oL = #{oL},
-			`area` = #{area},
-			intel = #{intel}
-			}
-						""")
-	void addAram(@Param("oL") String oL, @Param("area") String area, @Param("intel") String intel);
+			intel = #{intel},
+			`area` = #{area}
+					""")
 
-	Aram writeAram(String area, String intel);
+	void writeAram(@Param("oL") String oL, @Param("area") String area, @Param("intel") String intel);
 
 }

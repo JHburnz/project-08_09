@@ -39,7 +39,7 @@
       <c:if test="${rq.logined}">
 
         <li>
-          <a href="/usr/aram/add" class="h-full flex items-center px-3 hover:underline">
+          <a href="/usr/aram/write" class="h-full flex items-center px-3 hover:underline">
             <span>구역추가</span>
           </a>
         </li>
