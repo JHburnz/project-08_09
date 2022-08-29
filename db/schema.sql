@@ -23,7 +23,8 @@ CREATE TABLE `aram` (
     workDate DATETIME NOT NULL,
     repairDate DATETIME NOT NULL, 
     oL CHAR(100) NOT NULL,
-    `area` CHAR(100) NOT NULL   
+    intel CHAR(100) NOT NULL,
+    `area` CHAR(10) NOT NULL   
 );
 
 INSERT INTO `member`
@@ -49,8 +50,24 @@ cellphoneNo = "01011112222",
 location = "102호";
 
 
-SHOW TABLES;
+INSERT INTO `aram`
+SET workDate = NOW(),
+repairDate = NOW(),
+oL = '101호',
+intel = '유류 및 화기 다수',
+`area` = '주방';
+
+
+SELECT location
+FROM `member`;
+
+SELECT oL
+FROM `aram`;
 
 SELECT * FROM `member`;
 
 SELECT * FROM `aram`;
+
+SELECT `oL` FROM `aram`;
+
+
