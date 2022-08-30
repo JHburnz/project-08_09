@@ -71,3 +71,18 @@ SELECT * FROM `aram`;
 SELECT `oL` FROM `aram`;
 
 
+SELECT A.*
+FROM `aram` AS A
+LEFT JOIN MEMBER AS M
+ON A.oL = M.location
+ORDER BY id DESC;
+
+SELECT oL,workDate,repairDate,`area`
+			FROM `aram`;
+
+
+SELECT A.*,
+			M.name AS extra__writerName
+			FROM `aram` AS A
+			LEFT JOIN MEMBER AS M
+			ON A.oL = M.location;

@@ -1,6 +1,11 @@
 package com.kjh.protot.proj.controller;
 
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -21,23 +26,37 @@ public class AramController {
 		this.rq = rq;
 	}
 
+	@RequestMapping("/usr/aram/list")
+	public String showList(Model model) {
+		List<Aram> arams = aramService.getArams();
+
+		model.addAttribute("aram", arams);
+
+		return "usr/aram/list";
+	}
+
+//	@RequestMapping("/usr/aram/list")
+//	public String showList(HttpServletRequest req, Model model) {
+//
+//		String oL;
+//
+//		Member m;
+//		m = rq.getLoginedMember();
+//
+//		oL = m.getLocation();
+//
+//		List<Aram> arams = aramService.getForPrintArams(oL);
+//
+//		model.addAttribute("arams", arams);
+//
+//		return "usr/aram/list";
+//	}
+
 	@RequestMapping("/usr/aram/write")
 	public String write() {
 
 		return "usr/aram/write";
 	}
-
-//
-//	@RequestMapping("/usr/article/list")
-//	public String showList(Model model, @RequestParam(defaultValue = "area") String area) {
-//
-//		List<Aram> aram = aramService.getForPrintArams(rq.getLoginedMemberId(), area);
-//
-//		model.addAttribute("area", area);
-//
-//		return "usr/article/list";
-//	}
-
 
 	@RequestMapping("/usr/aram/doWrite")
 	@ResponseBody
