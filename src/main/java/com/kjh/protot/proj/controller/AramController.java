@@ -29,28 +29,13 @@ public class AramController {
 	@RequestMapping("/usr/aram/list")
 	public String showList(Model model) {
 		List<Aram> arams = aramService.getArams();
-
-		model.addAttribute("aram", arams);
+		
+		model.addAttribute("arams", arams);
 
 		return "usr/aram/list";
 	}
 
-//	@RequestMapping("/usr/aram/list")
-//	public String showList(HttpServletRequest req, Model model) {
-//
-//		String oL;
-//
-//		Member m;
-//		m = rq.getLoginedMember();
-//
-//		oL = m.getLocation();
-//
-//		List<Aram> arams = aramService.getForPrintArams(oL);
-//
-//		model.addAttribute("arams", arams);
-//
-//		return "usr/aram/list";
-//	}
+
 
 	@RequestMapping("/usr/aram/write")
 	public String write() {
@@ -62,23 +47,19 @@ public class AramController {
 	@ResponseBody
 	public String doWrite(String area, String intel) {
 
-		String oL;
+		String ol;
 
 		Member m;
 		m = rq.getLoginedMember();
 
-		oL = m.getLocation();
+		ol = m.getLocation();
 
 		if (Ut.empty(area)) {
 			return rq.jsHistoryBack("area(을)를 입력해주세요.");
 		}
 
-		if (Ut.empty(intel)) {
-			intel = "공란";
-		}
-
-		ResultData<String> aram = aramService.writeAram(oL, area, intel);
-		return rq.jsReplace((Ut.f("%s에 구역이 추가되었습니다", oL)), "/usr/aram/write");
+		ResultData<String> aram = aramService.writeAram(ol, area, intel);
+		return rq.jsReplace((Ut.f("%s에 구역이 추가되었습니다", ol)), "/usr/aram/write");
 
 	}
 

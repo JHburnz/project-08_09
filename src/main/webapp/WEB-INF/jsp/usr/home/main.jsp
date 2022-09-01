@@ -40,17 +40,11 @@
           </c:if>
 
           <c:if test="${rq.isLogined()}">
-            <h1>작동 상황</h1>
-            
+            <h1>작동상황</h1>
             
             
             
           </c:if>
-
-
-
-
-
         </tbody>
       </table>
     </form>

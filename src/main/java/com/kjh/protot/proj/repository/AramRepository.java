@@ -16,30 +16,21 @@ public interface AramRepository {
 			INSERT INTO `aram`
 			SET workDate = NOW(),
 			repairDate = NOW(),
-			oL = #{oL},
+			ol = #{ol},
 			intel = #{intel},
 			`area` = #{area}
 					""")
 
-	void writeAram(@Param("oL") String oL, @Param("area") String area, @Param("intel") String intel);
+	void writeAram(@Param("ol") String ol, @Param("area") String area, @Param("intel") String intel);
 
 	@Select("""
 			SELECT A.*
 			FROM `aram` AS A
 			LEFT JOIN member AS M
-			ON A.oL = M.location
+			ON A.ol = M.location
 			""")
 
 	public List<Aram> getForPrintArams();
-
-//	@Select("""
-//			SELECT A.*,
-//			M.location AS ownerL
-//			FROM `aram` AS A
-//			LEFT JOIN member AS M
-//			ON A.oL = M.location
-//			""")
-//	public List<Aram> getForPrintArams();
 
 	// <a class="btn-text-link" href="../aram/detail?id=${aram.oL}">${aram.area}</a>
 }

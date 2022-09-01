@@ -48,9 +48,9 @@ public class Rq {
 			isLogined = true;
 			loginedMemberId = (int) session.getAttribute("loginedMemberId");
 			loginedMember = memberService.getMemberById(loginedMemberId);
-			
+
 		}
-		this.loginedMemberLoca = loginedMemberLoca;
+
 		this.isLogined = isLogined;
 		this.loginedMemberId = loginedMemberId;
 		this.loginedMember = loginedMember;

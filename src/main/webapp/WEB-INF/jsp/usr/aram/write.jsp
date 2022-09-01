@@ -18,8 +18,14 @@
 			form.area.focus();
 			return;
 		}
+		
+		form.intel.value = form.intel.value.trim();
+		if (form.intel.value.length == 0) {
+			alert('정보를 입력해주세요.');
+			form.intel.focus();
+			return;
+		}
 
-		form.intel.value = markdown;
 		form.submit();
 		AramWrite__submitDone = true;
 	}
@@ -29,7 +35,6 @@
   <div class="container mx-auto px-3">
     <form onsubmit="AramWrite__submit(this); return false;" class="table-box-type-1" method="POST"
       action="../aram/doWrite">
-      <input type="hidden" name="intel" />
       <table>
         <colgroup>
           <col width="200" />

@@ -21,8 +21,6 @@ public class MemberController {
 		this.rq = rq;
 	}
 
-	// /usr/member/doJoin?loginId=123&loginPw=123&name=123&nickname=123&email=123&cellphoneNo=123&location=123
-
 	@RequestMapping("/usr/member/doJoin")
 	@ResponseBody
 	public String doJoin(String loginId, String loginPw, String name, String cellphoneNo, String email, String location,
@@ -66,7 +64,6 @@ public class MemberController {
 	public String showJoin() {
 		return "usr/member/join";
 	}
-
 
 	@RequestMapping("/usr/member/login")
 	public String showLogin() {
@@ -147,35 +144,15 @@ public class MemberController {
 	}
 
 	@RequestMapping("/usr/member/modify")
-	public String showModify(String memberModifyAuthKey) {
-		if (Ut.empty(memberModifyAuthKey)) {
-			return rq.historyBackJsOnView("memberModifyAuthKey(이)가 필요합니다.");
-		}
-
-		ResultData checkMemberModifyAuthKeyRd = memberService.checkMemberModifyAuthKey(rq.getLoginedMemberId(),
-				memberModifyAuthKey);
-
-		if (checkMemberModifyAuthKeyRd.isFail()) {
-			return rq.historyBackJsOnView(checkMemberModifyAuthKeyRd.getMsg());
-		}
+	public String showModify() {
 
 		return "usr/member/modify";
 	}
 
 	@RequestMapping("/usr/member/doModify")
 	@ResponseBody
-	public String doModify(String memberModifyAuthKey, String loginPw, String name, String email, String cellphoneNo,
-			String location, String area) {
-		if (Ut.empty(memberModifyAuthKey)) {
-			return rq.jsHistoryBack("memberModifyAuthKey(이)가 필요합니다.");
-		}
-
-		ResultData checkMemberModifyAuthKeyRd = memberService.checkMemberModifyAuthKey(rq.getLoginedMemberId(),
-				memberModifyAuthKey);
-
-		if (checkMemberModifyAuthKeyRd.isFail()) {
-			return rq.jsHistoryBack(checkMemberModifyAuthKeyRd.getMsg());
-		}
+	public String doModify(String loginPw, String name, String email, String cellphoneNo, String location,
+			String area) {
 
 		if (Ut.empty(loginPw)) {
 			loginPw = null;
@@ -195,10 +172,6 @@ public class MemberController {
 
 		if (Ut.empty(location)) {
 			return rq.jsHistoryBack("위치(을) 입력해주세요.");
-		}
-
-		if (Ut.empty(area)) {
-			return rq.jsHistoryBack("구역을(을) 입력해주세요.");
 		}
 
 		ResultData modifyRd = memberService.modify(rq.getLoginedMemberId(), loginPw, name, email, cellphoneNo,

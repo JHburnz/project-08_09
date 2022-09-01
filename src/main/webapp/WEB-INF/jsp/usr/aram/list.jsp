@@ -25,7 +25,7 @@
       <tbody>
         <c:forEach var="aram" items="${arams}">
           <tr>
-            <td>${aram.oL}</td>
+            <td>${aram.ol}</td>
             <td>${aram.workDate.substring(2, 16)}</td>
             <td>${aram.repairDate.substring(2, 16)}</td>
             <td>${aram.area}</td>
@@ -34,7 +34,7 @@
       </tbody>
     </table>
   </div>
-  </div>
+
 </section>
 
 <%@ include file="../common/foot.jspf"%>

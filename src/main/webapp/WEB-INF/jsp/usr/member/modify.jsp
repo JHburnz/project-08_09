@@ -33,12 +33,6 @@
 			form.name.focus();
 			return;
 		}
-		form.nickname.value = form.nickname.value.trim();
-		if (form.nickname.value.length == 0) {
-			alert('닉네임을 입력해주세요.');
-			form.nickname.focus();
-			return;
-		}
 		form.email.value = form.email.value.trim();
 		if (form.email.value.length == 0) {
 			alert('이메일을 입력해주세요.');
@@ -49,6 +43,13 @@
 		if (form.cellphoneNo.value.length == 0) {
 			alert('휴대전화번호를 입력해주세요.');
 			form.cellphoneNo.focus();
+			return;
+		}
+
+	form.location.value = form.location.value.trim();
+		if (form.location.value.length == 0) {
+			alert('위치를 입력해주세요.');
+			form.location.focus();
 			return;
 		}
 		MemberModify__submitDone = true;
@@ -107,19 +108,9 @@
               <th>위치</th>
               <td>
                 <input class="input input-bordered" name="location" placeholder="위치를 입력해주세요." type="text"
-                  value="${rq.loginedMember.nickname}" />
+                  value="${rq.loginedMember.location}" />
               </td>
             </tr>
-            <tr>
-              <th>경계구역</th>
-              <td>
-                <input class="input input-bordered" name="area" placeholder="경계구역를 입력해주세요." type="text"
-                  value="${rq.loginedMember.nickname}" />
-              </td>
-            </tr>
-
-
-
 
             <tr>
               <th>회원정보수정</th>

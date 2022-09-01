@@ -22,7 +22,7 @@ CREATE TABLE `aram` (
     id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
     workDate DATETIME NOT NULL,
     repairDate DATETIME NOT NULL, 
-    oL CHAR(100) NOT NULL,
+    ol CHAR(100)NOT NULL,
     intel CHAR(100) NOT NULL,
     `area` CHAR(10) NOT NULL   
 );
@@ -53,7 +53,7 @@ location = "102호";
 INSERT INTO `aram`
 SET workDate = NOW(),
 repairDate = NOW(),
-oL = '101호',
+ol = '101호',
 intel = '유류 및 화기 다수',
 `area` = '주방';
 
@@ -61,28 +61,27 @@ intel = '유류 및 화기 다수',
 SELECT location
 FROM `member`;
 
-SELECT oL
+SELECT ol
 FROM `aram`;
 
 SELECT * FROM `member`;
 
 SELECT * FROM `aram`;
 
-SELECT `oL` FROM `aram`;
+SELECT `ol` FROM `aram`;
 
 
 SELECT A.*
 FROM `aram` AS A
 LEFT JOIN MEMBER AS M
-ON A.oL = M.location
+ON A.ol = M.location
 ORDER BY id DESC;
 
-SELECT oL,workDate,repairDate,`area`
-			FROM `aram`;
+SELECT ol,workDate,repairDate,`area`
+FROM `aram`;
 
+SELECT A.*
+FROM `aram` AS A
+LEFT JOIN MEMBER AS M
+ON A.ol = M.location;
 
-SELECT A.*,
-			M.name AS extra__writerName
-			FROM `aram` AS A
-			LEFT JOIN MEMBER AS M
-			ON A.oL = M.location;
