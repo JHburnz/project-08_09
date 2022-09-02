@@ -22,9 +22,11 @@ CREATE TABLE `aram` (
     id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
     workDate DATETIME NOT NULL,
     repairDate DATETIME NOT NULL, 
+    activeDate DATETIME NOT NULL,
     ol CHAR(100)NOT NULL,
     intel CHAR(100) NOT NULL,
-    `area` CHAR(10) NOT NULL   
+    `area` CHAR(10) NOT NULL,
+    `stat` BOOLEAN NOT NULL  
 );
 
 INSERT INTO `member`
@@ -58,6 +60,30 @@ intel = '유류 및 화기 다수',
 `area` = '주방';
 
 
+
+INSERT INTO `aram`
+SET workDate = NOW(),
+repairDate = NOW(),
+ol = '102호',
+intel = '유류 및 화기 다수',
+`area` = '주방';
+
+
+INSERT INTO `aram`
+SET workDate = NOW(),
+repairDate = NOW(),
+ol = '101호',
+intel = '목재가구 천,의류 등',
+`area` = '안방';
+SELECT location
+FROM `member`;
+
+INSERT INTO `aram`
+SET workDate = NOW(),
+repairDate = NOW(),
+ol = '102호',
+intel = '목재가구 천,의류 등',
+`area` = '안방';
 SELECT location
 FROM `member`;
 
@@ -84,4 +110,15 @@ SELECT A.*
 FROM `aram` AS A
 LEFT JOIN MEMBER AS M
 ON A.ol = M.location;
+
+
+SELECT ol,`area`,stat,activeDate
+FROM `aram`
+WHERE ol = "101호";
+
+
+SELECT ol,`area`,stat
+FROM `aram`
+WHERE ol = "102호";
+
 

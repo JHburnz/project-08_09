@@ -32,5 +32,19 @@ public class AramService {
 		return arams;
 	}
 
+	public ResultData onStat() {
+		aramRepository.onStat();
+		return ResultData.from("S-1", "101 주방 화재");
+	}
+
+	public ResultData offStat() {
+		aramRepository.offStat();
+		return ResultData.from("S-2", "101 주방 멈춤");
+	}
+
+	public ResultData setTime() {
+		aramRepository.setTime();
+		return ResultData.from("S-3", "시간 설정");
+	}
 
 }

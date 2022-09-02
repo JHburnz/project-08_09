@@ -6,47 +6,62 @@
 <section class="mt-5">
   <div class="container mx-auto px-3">
     <form class="table-box-type-1" method="POST" action="../member/doLogin">
-      <table>
-        <colgroup>
-          <col width="200" />
-        </colgroup>
-        <tbody>
-
-          <c:if test="${!rq.isLogined()}">
+      <c:if test="${!rq.isLogined()}">
+        <tr>
+          <th>로그인아이디</th>
+          <td>
+            <input name="loginId" type="text" placeholder="로그인아이디" class=" w-96 input input-bordered w-full max-w-xs" />
+          </td>
+        </tr>
+        <tr>
+          <th>로그인비밀번호</th>
+          <td>
+            <input name="loginPw" type="password" placeholder="로그인비밀번호"
+              class=" w-96 input input-bordered w-full max-w-xs" />
+          </td>
+        </tr>
+        <tr>
+          <th>로그인</th>
+          <td>
+            <a href="/usr/member/join" class="btn btn-primary">
+              <span>회원가입</span>
+            </a>
+            <button type="submit" class="btn btn-primary">로그인</button>
+            <button type="button" class="btn btn-outline btn-success" onclick="history.back();">뒤로가기</button>
+          </td>
+        </tr>
+      </c:if>
+    </form>
+    <form class="table-box-type-1" method="POST" action="../aram/ring">
+      <c:if test="${rq.isLogined()}">
+        <h1>작동상황</h1>
+        <table>
+          <colgroup>
+            <col width="100" />
+            <col width="200" />
+            <col width="100" />
+            <col width="300" />
+          </colgroup>
+          <thead>
             <tr>
-              <th>로그인아이디</th>
-              <td>
-                <input name="loginId" type="text" placeholder="로그인아이디"
-                  class=" w-96 input input-bordered w-full max-w-xs" />
-              </td>
+              <th>위치</th>
+              <th>작동시간</th>
+              <th>구역</th>
+              <th>추가정보</th>
             </tr>
-            <tr>
-              <th>로그인비밀번호</th>
-              <td>
-                <input name="loginPw" type="password" placeholder="로그인비밀번호"
-                  class=" w-96 input input-bordered w-full max-w-xs" />
-              </td>
-            </tr>
-            <tr>
-              <th>로그인</th>
-              <td>
-                <a href="/usr/member/join" class="btn btn-primary">
-                  <span>회원가입</span>
-                </a>
-                <button type="submit" class="btn btn-primary">로그인</button>
-                <button type="button" class="btn btn-outline btn-success" onclick="history.back();">뒤로가기</button>
-              </td>
-            </tr>
-          </c:if>
-
-          <c:if test="${rq.isLogined()}">
-            <h1>작동상황</h1>
-            
-            
-            
-          </c:if>
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            <c:forEach var="aram" items="${arams}">
+              <tr>
+                <td>${aram.ol}</td>
+                <td>${aram.activeDate.substring(2, 16)}</td>
+                <td>${aram.area}</td>
+                <td>${aram.intel}</td>
+              </tr>
+            </c:forEach>
+          </tbody>
+        </table>
+      </c:if>
     </form>
   </div>
 </section>

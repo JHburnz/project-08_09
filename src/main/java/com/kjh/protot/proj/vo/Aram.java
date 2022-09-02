@@ -13,5 +13,5 @@ public class Aram {
 	public boolean status;
 	public String area;
 	public String ol;
-
+	public static boolean stat;
 }

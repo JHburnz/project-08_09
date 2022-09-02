@@ -24,12 +24,14 @@
       </thead>
       <tbody>
         <c:forEach var="aram" items="${arams}">
-          <tr>
-            <td>${aram.ol}</td>
-            <td>${aram.workDate.substring(2, 16)}</td>
-            <td>${aram.repairDate.substring(2, 16)}</td>
-            <td>${aram.area}</td>
-          </tr>
+          <c:if test="${rq.loginedMember.location == aram.ol}">
+            <tr>
+              <td>${aram.ol}</td>
+              <td>${aram.workDate.substring(2, 16)}</td>
+              <td>${aram.repairDate.substring(2, 16)}</td>
+              <td>${aram.area}</td>
+            </tr>
+          </c:if>
         </c:forEach>
       </tbody>
     </table>

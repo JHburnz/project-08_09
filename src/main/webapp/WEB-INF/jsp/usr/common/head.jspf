@@ -62,6 +62,18 @@
           </a>
         </li>
       </c:if>
+
+      <li>
+        <a href="/usr/aram/on" class="h-full flex items-center px-3 hover:underline">
+          <span>101주방on</span>
+        </a>
+      </li>
+      <li>
+        <a href="/usr/aram/off" class="h-full flex items-center px-3 hover:underline">
+          <span>101주방off</span>
+        </a>
+      </li>
+
     </ul>
     </div>
   </header>
