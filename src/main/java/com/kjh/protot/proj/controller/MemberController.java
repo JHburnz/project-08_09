@@ -21,6 +21,11 @@ public class MemberController {
 		this.rq = rq;
 	}
 
+	@RequestMapping("/usr/member/join")
+	public String showJoin() {
+		return "usr/member/join";
+	}
+
 	@RequestMapping("/usr/member/doJoin")
 	@ResponseBody
 	public String doJoin(String loginId, String loginPw, String name, String cellphoneNo, String email, String location,
@@ -60,10 +65,6 @@ public class MemberController {
 		return rq.jsReplace("회원가입이 완료되었습니다. 로그인 후 이용해주세요.", afterJoinUri);
 	}
 
-	@RequestMapping("/usr/member/join")
-	public String showJoin() {
-		return "usr/member/join";
-	}
 
 	@RequestMapping("/usr/member/login")
 	public String showLogin() {

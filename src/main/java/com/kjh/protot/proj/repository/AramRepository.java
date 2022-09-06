@@ -17,9 +17,11 @@ public interface AramRepository {
 			INSERT INTO `aram`
 			SET workDate = NOW(),
 			repairDate = NOW(),
+			activeDate = NOW(),
 			ol = #{ol},
 			intel = #{intel},
-			`area` = #{area}
+			`area` = #{area},
+			`stat` = 0
 					""")
 
 	void writeAram(@Param("ol") String ol, @Param("area") String area, @Param("intel") String intel);
@@ -35,24 +37,45 @@ public interface AramRepository {
 
 	@Update("""
 			UPDATE `aram`
-			SET stat = TRUE
+			SET stat = 1
 			WHERE ol = "101호" AND `area` = "주방";
 									""")
-	public void onStat();
+	public void konStat();
 
 	@Update("""
 			UPDATE `aram`
-			SET stat = FALSE
+			SET stat = 0
 			WHERE ol = "101호" AND `area` = "주방";
 									""")
-	public void offStat();
+	public void koffStat();
 
 	@Update("""
 			UPDATE `aram`
 			SET activeDate = NOW()
 			WHERE ol = "101호" AND `area` = "주방";
 									""")
-	public void setTime();
+	public void ksetTime();
 
-	// <a class="btn-text-link" href="../aram/detail?id=${aram.oL}">${aram.area}</a>
+	@Update("""
+			UPDATE `aram`
+			SET stat = 1
+			WHERE ol = "101호" AND `area` = "안방";
+									""")
+	public void bonStat();
+
+	@Update("""
+			UPDATE `aram`
+			SET stat = 0
+			WHERE ol = "101호" AND `area` = "안방";
+									""")
+	public void boffStat();
+
+	@Update("""
+			UPDATE `aram`
+			SET activeDate = NOW()
+			WHERE ol = "101호" AND `area` = "안방";
+									""")
+	public void bsetTime();
+
+	// <a class="btn-text-link" href="../aram/detail?id=${aram.ol}">${aram.area}</a>
 }

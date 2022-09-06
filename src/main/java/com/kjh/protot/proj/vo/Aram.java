@@ -10,8 +10,10 @@ import lombok.NoArgsConstructor;
 public class Aram {
 	public String workDate;
 	public String repairDate;
+	public String activeDate;
+	public String intel;
 	public boolean status;
 	public String area;
 	public String ol;
-	public static boolean stat;
+	public int stat;
 }

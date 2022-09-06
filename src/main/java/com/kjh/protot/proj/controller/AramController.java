@@ -20,12 +20,11 @@ import com.kjh.protot.proj.vo.Rq;
 public class AramController {
 	AramService aramService;
 	Rq rq;
-	boolean stat;
 
 	public AramController(Rq rq, AramService aramService) {
 		this.aramService = aramService;
 		this.rq = rq;
-		this.stat = stat;
+
 	}
 
 	@RequestMapping("/usr/aram/list")
@@ -63,27 +62,48 @@ public class AramController {
 
 	}
 
-	@RequestMapping("/usr/aram/on")
+	@RequestMapping("/usr/aram/kon")
 	@ResponseBody
-	public String on() {
-		aramService.setTime();
-		aramService.onStat();
+	public String kon() {
+		aramService.ksetTime();
+		aramService.konStat();
 
 		return rq.jsReplace((Ut.f("%s구역이 작동", "101호 주방")), "/usr/home/main");
 	}
 
-	@RequestMapping("/usr/aram/off")
+	@RequestMapping("/usr/aram/koff")
 	@ResponseBody
-	public String off() {
+	public String koff() {
 
-		aramService.offStat();
+		aramService.koffStat();
 
-		return rq.jsHistoryBack("작동을 멈춤니다");
+		return rq.jsReplace("작동을 멈춤니다", "/");
 	}
 
-	@RequestMapping("/usr/aram/ring")
+	@RequestMapping("/usr/aram/bon")
+	@ResponseBody
+	public String bon() {
+		aramService.bsetTime();
+		aramService.bonStat();
+
+		return rq.jsReplace((Ut.f("%s구역이 작동", "101호 주방")), "/usr/home/main");
+	}
+
+	@RequestMapping("/usr/aram/boff")
+	@ResponseBody
+	public String boff() {
+
+		aramService.boffStat();
+
+		return rq.jsReplace("작동을 멈춤니다", "/");
+	}
+
+	@RequestMapping("/usr/aram/")
 	public String ring() {
 
 		return "/usr/aram/ring";
 	}
+	
+	
+	
 }

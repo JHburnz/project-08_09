@@ -32,18 +32,33 @@ public class AramService {
 		return arams;
 	}
 
-	public ResultData onStat() {
-		aramRepository.onStat();
+	public ResultData konStat() {
+		aramRepository.konStat();
 		return ResultData.from("S-1", "101 주방 화재");
 	}
 
-	public ResultData offStat() {
-		aramRepository.offStat();
+	public ResultData koffStat() {
+		aramRepository.koffStat();
 		return ResultData.from("S-2", "101 주방 멈춤");
 	}
 
-	public ResultData setTime() {
-		aramRepository.setTime();
+	public ResultData bonStat() {
+		aramRepository.bonStat();
+		return ResultData.from("S-1", "101 안방 화재");
+	}
+
+	public ResultData boffStat() {
+		aramRepository.boffStat();
+		return ResultData.from("S-2", "101 안방 멈춤");
+	}
+
+	public ResultData ksetTime() {
+		aramRepository.ksetTime();
+		return ResultData.from("S-3", "시간 설정");
+	}
+
+	public ResultData bsetTime() {
+		aramRepository.bsetTime();
 		return ResultData.from("S-3", "시간 설정");
 	}
 
