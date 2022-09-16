@@ -98,12 +98,4 @@ public class AramController {
 		return rq.jsReplace("작동을 멈춤니다", "/");
 	}
 
-	@RequestMapping("/usr/aram/")
-	public String ring() {
-
-		return "/usr/aram/ring";
-	}
-	
-	
-	
 }
