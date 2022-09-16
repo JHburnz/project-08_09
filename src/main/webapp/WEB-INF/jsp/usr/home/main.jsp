@@ -111,6 +111,7 @@
 										<td>${aram.activeDate.substring(2, 16)}</td>
 										<td>${aram.area}</td>
 										<td>${aram.intel}</td>
+										<td>${aram.intel}</td>
 									</tr>
 								</c:if>
 							</c:if>
