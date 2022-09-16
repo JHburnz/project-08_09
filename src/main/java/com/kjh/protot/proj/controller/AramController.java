@@ -62,6 +62,15 @@ public class AramController {
 
 	}
 
+	@RequestMapping("/usr/article/detail")
+	public String showDetail(Model model, String ol, String area) {
+		Aram aram = aramService.getForPrintAram(rq.getLoginedMemberId(), ol, area);
+
+		model.addAttribute("aram", aram);
+
+		return "usr/article/detail";
+	}
+
 	@RequestMapping("/usr/aram/kon")
 	@ResponseBody
 	public String kon() {

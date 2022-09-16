@@ -77,5 +77,13 @@ public interface AramRepository {
 									""")
 	public void bsetTime();
 
+	@Select("""
+			SELECT *
+			FROM `aram`
+			WHERE ol = #{ol} AND `area` = #{area}
+			""")
+
+	Aram getForPrintAram(@Param("ol") String ol, @Param("area") String area);
+
 	// <a class="btn-text-link" href="../aram/detail?id=${aram.ol}">${aram.area}</a>
 }

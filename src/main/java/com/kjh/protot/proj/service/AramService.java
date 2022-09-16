@@ -62,4 +62,17 @@ public class AramService {
 		return ResultData.from("S-3", "시간 설정");
 	}
 
+	public Aram getForPrintAram(int loginedMemberId, String ol, String area) {
+		Aram aram = aramRepository.getForPrintAram(ol, area);
+
+		updateForPrintData(loginedMemberId, aram);
+
+		return aram;
+	}
+
+	private void updateForPrintData(int loginedMemberId, Aram aram) {
+		// TODO Auto-generated method stub
+
+	}
+
 }
