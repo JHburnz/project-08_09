@@ -12,7 +12,6 @@
 					<col width="150" />
 					<col width="150" />
 					<col width="50" />
-
 				</colgroup>
 				<thead>
 					<tr>
@@ -30,8 +29,7 @@
 								<td>${aram.workDate.substring(2, 16)}</td>
 								<td>${aram.repairDate.substring(2, 16)}</td>
 								<td>
-									<a class="btn-text-link block w-full truncate"
-										href="${rq.getArticleDetailUriFromArticleList(aram.ol)}">${aram.area}</a>
+									<a class="btn-text-link" href="../aram/detail?id=${aram.id}">${aram.area}</a>
 								</td>
 							</tr>
 						</c:if>

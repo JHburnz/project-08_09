@@ -78,12 +78,15 @@ public interface AramRepository {
 	public void bsetTime();
 
 	@Select("""
-			SELECT *
-			FROM `aram`
-			WHERE ol = #{ol} AND `area` = #{area}
+			SELECT A.*,
+			M.name AS extra__writerName
+			FROM aram AS A
+			LEFT JOIN member AS M
+			ON A.ol = M.location
+			WHERE 1
+			AND A.id = #{id}
 			""")
-
-	Aram getForPrintAram(@Param("ol") String ol, @Param("area") String area);
+	public Aram getForPrintAram(@Param("id") int id);
 
 	// <a class="btn-text-link" href="../aram/detail?id=${aram.ol}">${aram.area}</a>
 }

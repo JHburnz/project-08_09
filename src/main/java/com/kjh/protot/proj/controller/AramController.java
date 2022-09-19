@@ -62,13 +62,13 @@ public class AramController {
 
 	}
 
-	@RequestMapping("/usr/article/detail")
-	public String showDetail(Model model, String ol, String area) {
-		Aram aram = aramService.getForPrintAram(rq.getLoginedMemberId(), ol, area);
+	@RequestMapping("/usr/aram/detail")
+	public String showDetail(Model model, int id) {
+		Aram aram = aramService.getForPrintAram(id);
 
 		model.addAttribute("aram", aram);
 
-		return "usr/article/detail";
+		return "usr/aram/detail";
 	}
 
 	@RequestMapping("/usr/aram/kon")

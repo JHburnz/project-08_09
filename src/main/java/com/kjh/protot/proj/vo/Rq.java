@@ -181,8 +181,8 @@ public class Rq {
 		return null;
 	}
 
-	public String getArticleDetailUriFromArticleList(Aram aram) {
-		return "../aram/detail?ol=" + aram.getOl() + "&listUri=" + getEncodedCurrentUri();
+	public String getAramDetail(Aram aram1, Aram aram2) {
+		return "../aram/detail?ol=" + aram2 + "&area=" + aram1;
 	}
 
 }
