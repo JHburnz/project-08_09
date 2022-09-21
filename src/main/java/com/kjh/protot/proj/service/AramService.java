@@ -32,39 +32,41 @@ public class AramService {
 		return arams;
 	}
 
-	public ResultData konStat() {
-		aramRepository.konStat();
+	public ResultData onStat(String area, String ol) {
+		aramRepository.onStat(area, ol);
 		return ResultData.from("S-1", "101 주방 화재");
 	}
 
-	public ResultData koffStat() {
-		aramRepository.koffStat();
+	public ResultData offStat(String area, String ol) {
+		aramRepository.offStat(area, ol);
 		return ResultData.from("S-2", "101 주방 멈춤");
 	}
 
-	public ResultData bonStat() {
-		aramRepository.bonStat();
-		return ResultData.from("S-1", "101 안방 화재");
-	}
-
-	public ResultData boffStat() {
-		aramRepository.boffStat();
-		return ResultData.from("S-2", "101 안방 멈춤");
-	}
-
-	public ResultData ksetTime() {
-		aramRepository.ksetTime();
-		return ResultData.from("S-3", "시간 설정");
-	}
-
-	public ResultData bsetTime() {
-		aramRepository.bsetTime();
+	public ResultData setTime(String area, String ol) {
+		aramRepository.setonTime(area, ol);
 		return ResultData.from("S-3", "시간 설정");
 	}
 
 	public Aram getForPrintAram(int id) {
 		return aramRepository.getForPrintAram(id);
 
+	}
+
+	public void deleteAram(int id) {
+		aramRepository.deleteAram(id);
+	}
+
+	public ResultData<Aram> modifyAram(int id, String area, String intel) {
+		aramRepository.modifyAram(id, area, intel);
+
+		Aram aram = getForPrintAram(id);
+
+		return ResultData.from("S-1", "게시물이 수정되었습니다");
+	}
+
+	public ResultData addHis(String area) {
+		aramRepository.addHis(area);
+		return ResultData.from("S-1", "");
 	}
 
 }

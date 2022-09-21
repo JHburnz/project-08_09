@@ -1,7 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:set var="pageTitle" value="경보기 추가" />
 <%@ include file="../common/head.jspf"%>
 
 
@@ -34,47 +32,39 @@
 
 
 <section class="mt-5">
+  <div class="container mx-auto px-3">
+    <form onsubmit="AramWrite__submit(this); return false;" class="table-box-type-1" method="POST"
+      action="../aram/doWrite">
+      <table>
+        <colgroup>
+          <col width="200" />
+        </colgroup>
+        <tbody>
+          <tr>
+            <th>구역</th>
+            <td>
+              <input class="input input-bordered" name="area" placeholder="감지기가 추가된구역" type="text" />
+            </td>
+          </tr>
+          <tr>
+            <th>정보</th>
+            <td>
+              <input class="input input-bordered" name="intel" placeholder="구역의 추가정보" type="text" />
+            </td>
+          </tr>
 
 
-
-
-
-	<div class="container mx-auto px-3">
-		<form onsubmit="AramWrite__submit(this); return false;"
-			class="table-box-type-1" method="POST" action="../aram/doWrite">
-			<table>
-				<colgroup>
-					<col width="200" />
-				</colgroup>
-				<tbody>
-					<tr>
-						<th>구역</th>
-						<td>
-							<input class="form-style" name="area" placeholder="감지기가 추가된구역"
-								type="text" />
-						</td>
-					</tr>
-					<tr>
-						<th>정보</th>
-						<td>
-							<input class="form-style" name="intel" placeholder="구역의 추가정보"
-								type="text" />
-						</td>
-					</tr>
-
-
-					<tr>
-						<th></th>
-						<td>
-							<button type="submit" class="btn btn-primary">추가하기</button>
-							<button type="button" class="btn btn-outline btn-success"
-								onclick="history.back();">뒤로가기</button>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</form>
-	</div>
+          <tr>
+            <th></th>
+            <td>
+              <button type="submit" class="btn btn-primary">추가하기</button>
+              <button type="button" class="btn btn-outline btn-success" onclick="history.back();">뒤로가기</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </form>
+  </div>
 </section>
 
 

@@ -29,6 +29,16 @@ CREATE TABLE `aram` (
     `stat` BOOLEAN NOT NULL  
 );
 
+CREATE TABLE `history` (
+    hid INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT, 
+    id INT(10) NOT NULL ,
+    activeDate DATETIME NOT NULL,
+    ol CHAR(100)NOT NULL,
+    intel CHAR(100) NOT NULL,
+    `area` CHAR(10) NOT NULL,
+    `stat` BOOLEAN NOT NULL   
+);
+
 INSERT INTO `member`
 SET regDate = NOW(),
 updateDate = NOW(),
@@ -121,4 +131,6 @@ SELECT ol,`area`,stat
 FROM `aram`
 WHERE ol = "102호";
 
+
+DESC `history`;
 

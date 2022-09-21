@@ -57,27 +57,6 @@
         </li>
       </c:if>
       <li>
-        <a href="/usr/aram/kon" class="h-full flex items-center px-3 hover:underline">
-          <span>101주방on</span>
-        </a>
-      </li>
-      <li>
-        <a href="/usr/aram/koff" class="h-full flex items-center px-3 hover:underline">
-          <span>101주방off</span>
-        </a>
-      </li>
-      <li>
-        <a href="/usr/aram/bon" class="h-full flex items-center px-3 hover:underline">
-          <span>101안방on</span>
-        </a>
-      </li>
-      <li>
-        <a href="/usr/aram/boff" class="h-full flex items-center px-3 hover:underline">
-          <span>101안방off</span>
-        </a>
-      </li>
-
-
     </ul>
   </header>
   <section class="mt-5">

@@ -71,40 +71,63 @@ public class AramController {
 		return "usr/aram/detail";
 	}
 
-	@RequestMapping("/usr/aram/kon")
-	@ResponseBody
-	public String kon() {
-		aramService.ksetTime();
-		aramService.konStat();
+	@RequestMapping("/usr/aram/button")
+	public String button() {
 
-		return rq.jsReplace((Ut.f("%s구역이 작동", "101호 주방")), "/usr/home/main");
+		return "usr/aram/button";
 	}
 
-	@RequestMapping("/usr/aram/koff")
+	@RequestMapping("/usr/aram/on")
 	@ResponseBody
-	public String koff() {
+	public String on(String area, String ol) {
 
-		aramService.koffStat();
-
-		return rq.jsReplace("작동을 멈춤니다", "/");
+		aramService.setTime(area, ol);
+		aramService.onStat(area, ol);
+		aramService.addHis(area);
+		
+		return rq.jsReplace((Ut.f("%s구역이 작동", area)), "/usr/aram/button");
 	}
 
-	@RequestMapping("/usr/aram/bon")
+	@RequestMapping("/usr/aram/off")
 	@ResponseBody
-	public String bon() {
-		aramService.bsetTime();
-		aramService.bonStat();
+	public String off(String area, String ol) {
 
-		return rq.jsReplace((Ut.f("%s구역이 작동", "101호 주방")), "/usr/home/main");
+		aramService.setTime(area, ol);
+		aramService.offStat(area, ol);
+
+		return rq.jsReplace((Ut.f("%s구역이 작동", area)), "/usr/aram/button");
 	}
 
-	@RequestMapping("/usr/aram/boff")
+	@RequestMapping("/usr/aram/doDelete")
 	@ResponseBody
-	public String boff() {
+	public String doDelete(int id) {
 
-		aramService.boffStat();
+		Aram aram = aramService.getForPrintAram(id);
 
-		return rq.jsReplace("작동을 멈춤니다", "/");
+		aramService.deleteAram(id);
+
+		return Ut.jsReplace(Ut.f("%d번 게시물을 삭제하였습니다.", id), "../aram/list");
+	}
+
+	@RequestMapping("/usr/aram/modify")
+	public String showModify(Model model, int id) {
+
+		Aram aram = aramService.getForPrintAram(id);
+
+		model.addAttribute("aram", aram);
+
+		return "usr/aram/modify";
+	}
+
+	@RequestMapping("/usr/aram/doModify")
+	@ResponseBody
+	public String doModify(int id, String area, String intel) {
+
+		Aram aram = aramService.getForPrintAram(id);
+
+		aramService.modifyAram(id, area, intel);
+
+		return rq.jsReplace(Ut.f("%d번 글이 수정되었습니다.", id), Ut.f("../aram/detail?id=%d", id));
 	}
 
 }

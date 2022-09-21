@@ -4,7 +4,7 @@
 <%@ include file="../common/head.jspf"%>
 <section class="mt-5">
   <div class="container mx-auto px-3">
-    <form class="table-box-type-1" method="POST" action="../usr/aram/list">
+    <form class="table-box-type-1" method="POST" action="../usr/aram/history">
       <table>
         <colgroup>
           <col width="50" />
