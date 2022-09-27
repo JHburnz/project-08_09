@@ -65,15 +65,19 @@ public class AramService {
 		return ResultData.from("S-1", "게시물이 수정되었습니다");
 	}
 
-	public ResultData addHis(String area) {
-		aramRepository.addHis(area);
-		return ResultData.from("S-1", "");
+	public List<History> getHis() {
+		List<History> Historys = aramRepository.getForPrintHis();
+
+		return Historys;
 	}
 
-	public List<History> getHis() {
+	public ResultData addHis(String area,String ol) {
 
-		List<History> Historys = aramRepository.getForPrintHis();
-		return Historys;
+		Aram aram = aramRepository.getAram(area,ol);
+
+		aramRepository.addHis(aram.area, aram.activeDate, aram.intel, aram.id, aram.ol);
+
+		return ResultData.from("S-1", "기록추가");
 	}
 
 }

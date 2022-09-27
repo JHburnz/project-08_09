@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Aram {
-	private int id;
+	public int id;
 	public String workDate;
 	public String repairDate;
 	public String activeDate;

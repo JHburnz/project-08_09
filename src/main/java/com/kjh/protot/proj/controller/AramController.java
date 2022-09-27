@@ -82,7 +82,8 @@ public class AramController {
 
 		aramService.setTime(area, ol);
 		aramService.onStat(area, ol);
-
+		aramService.addHis(area,ol);
+		
 		return rq.jsReplace((Ut.f("%s구역이 작동", area)), "/usr/aram/button");
 	}
 
@@ -133,7 +134,7 @@ public class AramController {
 
 		List<History> historys = aramService.getHis();
 
-		model.addAttribute("history", historys);
+		model.addAttribute("historys", historys);
 
 		return "usr/aram/history";
 	}

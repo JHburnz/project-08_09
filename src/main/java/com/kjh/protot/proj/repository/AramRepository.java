@@ -37,6 +37,14 @@ public interface AramRepository {
 
 	public List<Aram> getForPrintArams();
 
+	@Select("""
+			SELECT *
+			FROM `aram`
+			WHERE area = #{area} AND ol = #{ol}
+			""")
+
+	public Aram getAram(@Param("area") String area, @Param("ol") String ol);
+
 	@Update("""
 			UPDATE `aram`
 			SET stat = 1
@@ -84,17 +92,18 @@ public interface AramRepository {
 
 	public void modifyAram(@Param("id") int id, @Param("area") String area, @Param("intel") String intel);
 
-	@Update("""
-			UPDATE A.*,
-			M.name AS extra__writerName
-			FROM aram AS A
-			LEFT JOIN member AS M
-			ON A.ol = M.location
-			WHERE 1
-			AND A.id = #{id}
-			""")
+	@Insert("""
+			INSERT INTO `history`
+			SET id =#{id},
+			activeDate = #{activeDate},
+			offDate = NOW(),
+			ol = #{ol},
+			intel = #{intel},
+			`area` = #{area}
+						""")
 
-	public void addHis(@Param("area") String area);
+	public void addHis(@Param("area") String area, @Param("activeDate") String activeDate, @Param("intel") String intel,
+			@Param("id") int id, @Param("ol") String ol);
 
 	@Select("""
 			SELECT H.*
@@ -105,5 +114,4 @@ public interface AramRepository {
 
 	List<History> getForPrintHis();
 
-	// <a class="btn-text-link" href="../aram/detail?id=${aram.ol}">${aram.area}</a>
 }

@@ -7,7 +7,7 @@
     <form class="table-box-type-1" method="POST" action="../usr/aram/history">
       <table>
         <colgroup>
-          <col width="100" />
+          <col width="50" />
           <col width="100" />
           <col width="50" />
           <col width="200" />
@@ -21,8 +21,8 @@
           </tr>
         </thead>
         <tbody>
-          <c:forEach var="aram" items="${arams}">
-            <c:if test="${rq.loginedMember.location == aram.ol}">
+          <c:forEach var="history" items="${historys}">
+            <c:if test="${rq.loginedMember.location == history.ol}">
               <tr>
                 <td>${history.id}</td>
                 <td>${history.activeDate.substring(2, 16)}</td>
