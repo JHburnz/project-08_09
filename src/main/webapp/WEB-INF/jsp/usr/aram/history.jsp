@@ -7,29 +7,27 @@
     <form class="table-box-type-1" method="POST" action="../usr/aram/history">
       <table>
         <colgroup>
+          <col width="100" />
+          <col width="100" />
           <col width="50" />
-          <col width="150" />
-          <col width="150" />
-          <col width="50" />
+          <col width="200" />
         </colgroup>
         <thead>
           <tr>
-            <th>위치</th>
-            <th>설치날짜</th>
-            <th>점검날짜</th>
+            <th>감지기식별번호</th>
+            <th>화재발생시간</th>
             <th>구역</th>
+            <th>구역추가정보</th>
           </tr>
         </thead>
         <tbody>
           <c:forEach var="aram" items="${arams}">
             <c:if test="${rq.loginedMember.location == aram.ol}">
               <tr>
-                <td>${aram.ol}</td>
-                <td>${aram.workDate.substring(2, 16)}</td>
-                <td>${aram.repairDate.substring(2, 16)}</td>
-                <td>
-                  <a class="btn-text-link" href="../aram/detail?id=${aram.id}">${aram.area}</a>
-                </td>
+                <td>${history.id}</td>
+                <td>${history.activeDate.substring(2, 16)}</td>
+                <td>${history.area}</td>
+                <td>${history.intel}</td>
               </tr>
             </c:if>
           </c:forEach>

@@ -51,6 +51,11 @@
           </a>
         </li>
         <li>
+          <a href="/usr/aram/history" class="h-full flex items-center px-3 hover:underline">
+            <span>화재기록</span>
+          </a>
+        </li>
+        <li>
           <a href="${rq.logoutUri}" class="h-full flex items-center px-3 hover:underline">
             <span>로그아웃</span>
           </a>

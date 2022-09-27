@@ -2,8 +2,6 @@ package com.kjh.protot.proj.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.kjh.protot.proj.service.AramService;
 import com.kjh.protot.proj.utill.Ut;
 import com.kjh.protot.proj.vo.Aram;
+import com.kjh.protot.proj.vo.History;
 import com.kjh.protot.proj.vo.Member;
 import com.kjh.protot.proj.vo.ResultData;
 import com.kjh.protot.proj.vo.Rq;
@@ -83,8 +82,7 @@ public class AramController {
 
 		aramService.setTime(area, ol);
 		aramService.onStat(area, ol);
-		aramService.addHis(area);
-		
+
 		return rq.jsReplace((Ut.f("%s구역이 작동", area)), "/usr/aram/button");
 	}
 
@@ -128,6 +126,16 @@ public class AramController {
 		aramService.modifyAram(id, area, intel);
 
 		return rq.jsReplace(Ut.f("%d번 글이 수정되었습니다.", id), Ut.f("../aram/detail?id=%d", id));
+	}
+
+	@RequestMapping("/usr/aram/history")
+	public String showHistory(Model model) {
+
+		List<History> historys = aramService.getHis();
+
+		model.addAttribute("history", historys);
+
+		return "usr/aram/history";
 	}
 
 }

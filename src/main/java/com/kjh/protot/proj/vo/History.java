@@ -10,12 +10,12 @@ public class History {
 	@NoArgsConstructor
 	@AllArgsConstructor
 	public class Aram {
+
+		private int hid;
 		private int id;
-		public String workDate;
-		public String repairDate;
 		public String activeDate;
+		public String offDate;
 		public String intel;
-		public boolean status;
 		public String area;
 		public String ol;
 		public int stat;

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.kjh.protot.proj.repository.AramRepository;
 import com.kjh.protot.proj.utill.Ut;
 import com.kjh.protot.proj.vo.Aram;
+import com.kjh.protot.proj.vo.History;
 import com.kjh.protot.proj.vo.Member;
 import com.kjh.protot.proj.vo.ResultData;
 import com.kjh.protot.proj.vo.Rq;
@@ -67,6 +68,12 @@ public class AramService {
 	public ResultData addHis(String area) {
 		aramRepository.addHis(area);
 		return ResultData.from("S-1", "");
+	}
+
+	public List<History> getHis() {
+
+		List<History> Historys = aramRepository.getForPrintHis();
+		return Historys;
 	}
 
 }

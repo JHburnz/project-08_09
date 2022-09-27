@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.kjh.protot.proj.vo.Aram;
+import com.kjh.protot.proj.vo.History;
 
 @Mapper
 public interface AramRepository {
@@ -75,17 +76,6 @@ public interface AramRepository {
 
 	public void deleteAram(@Param("id") int id);
 
-	@Select("""
-			SELECT A.*,
-			M.name AS extra__writerName
-			FROM aram AS A
-			LEFT JOIN member AS M
-			ON A.ol = M.location
-			WHERE 1
-			AND A.id = #{id}
-			""")
-	public Aram PrintHistory(@Param("id") int id);
-
 	@Update("""
 			UPDATE `aram`
 			SET intel = #{intel}
@@ -95,12 +85,25 @@ public interface AramRepository {
 	public void modifyAram(@Param("id") int id, @Param("area") String area, @Param("intel") String intel);
 
 	@Update("""
-			UPDATE `aram`
-			SET intel = #{intel}
-			WHERE id = #{id}
-									""")
+			UPDATE A.*,
+			M.name AS extra__writerName
+			FROM aram AS A
+			LEFT JOIN member AS M
+			ON A.ol = M.location
+			WHERE 1
+			AND A.id = #{id}
+			""")
 
 	public void addHis(@Param("area") String area);
+
+	@Select("""
+			SELECT H.*
+			FROM history AS H
+			LEFT JOIN member AS M
+			ON H.ol = M.location
+			""")
+
+	List<History> getForPrintHis();
 
 	// <a class="btn-text-link" href="../aram/detail?id=${aram.ol}">${aram.area}</a>
 }
